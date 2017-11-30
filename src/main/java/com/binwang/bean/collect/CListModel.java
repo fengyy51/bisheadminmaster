@@ -1,13 +1,13 @@
 package com.binwang.bean.collect;
 
 /**
- * Created by owen on 17/7/13.
+ * Created by yy on 17/7/13.
  */
 public class CListModel {
     private long id;
-    private String name;
+    private String regItem;
     private int isOk;
-    private String recUnit;
+//    private String recUnit;
 
     public CListModel() {
     }
@@ -28,19 +28,11 @@ public class CListModel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public void setRegItem(String regItem) {
+        this.regItem = regItem;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRecUnit() {
-        return recUnit;
-    }
-
-    public void setRecUnit(String recUnit) {
-        this.recUnit = recUnit;
+    public String getRegItem() {
+        return regItem;
     }
 }

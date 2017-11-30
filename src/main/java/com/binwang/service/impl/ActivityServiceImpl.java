@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * Created by owen on 17/5/11.
+ * Created by yy on 17/5/11.
  */
 @Service
 public class ActivityServiceImpl implements ActivityService {

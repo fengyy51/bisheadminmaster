@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by owen on 17/7/13.
+ * Created by yy on 17/7/13.
  */
 @Controller
 @RequestMapping("/collect")
