@@ -8,14 +8,16 @@ public class SignListModel {
     private String code;
     private int sign;
     private int status;
+    private String regItem;
     public SignListModel() {
     }
 
-    public SignListModel(String openId, String code, int sign,int status) {
+    public SignListModel(String openId, String code, int sign,int status,String regItem) {
         this.openId = openId;
         this.code = code;
         this.sign = sign;
         this.status=status;
+        this.regItem=regItem;
     }
 
     public String getOpenId() {
@@ -48,5 +50,13 @@ public class SignListModel {
 
     public int getStatus() {
         return status;
+    }
+
+    public String getRegItem() {
+        return regItem;
+    }
+
+    public void setRegItem(String regItem) {
+        this.regItem = regItem;
     }
 }
