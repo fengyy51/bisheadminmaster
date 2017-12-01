@@ -57,9 +57,9 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public int getListSum(long collectId, int type) {
+    public int getListSum(long collectId, int type,String openId) {
         try {
-            return collectDao.listSum(collectId, type);
+            return collectDao.listSum(collectId, type,openId);
         } catch (Exception e) {
             LOGGER.error("获取列表数量出错，collectId为：" + collectId);
             throw new RuntimeException("获取列表数量出错");

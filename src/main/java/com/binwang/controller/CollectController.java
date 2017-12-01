@@ -34,7 +34,8 @@ public class CollectController {
                        @RequestParam("pageSum") int pageSum) {
         try {
             List<CListModel> list = collectService.getList(collectId, type,openId, curPage, pageSum);
-            int sum = collectService.getListSum(collectId, type);
+            int sum = collectService.getListSum(collectId, type,openId);
+            //获取已通过人数
             int approveSum = collectService.getApproveSum(collectId);
             Map<String, Object> m = new HashMap<>();
             m.put("list", list);

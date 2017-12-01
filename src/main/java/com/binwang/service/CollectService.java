@@ -15,7 +15,7 @@ public interface CollectService {
 
     Boolean handleApprove(long collectId, long itemId, int type);
 
-    int getListSum(long collectId, int type);
+    int getListSum(long collectId, int type,String openId);
 
     int getApproveSum(long collectId);
 
