@@ -23,12 +23,11 @@ public interface ICollectDao {
     @Select("select count(id) from f_collect where collect_id = #{collectId} and is_ok = 1")
     int approveSum(@Param("collectId") long collectId);
 
-    @Update("update f_collect set is_ok = #{isOk} where id = #{itemId} and collect_id = #{collectId}")
+    @Update("update f_user_act set is_ok = #{isOk} where id = #{itemId} and act_id = #{collectId}")
     int handleApprove(@Param("collectId") long collectId, @Param("itemId") long itemId, @Param("isOk") int isOk);
 
-    @Select("select name,wechat_id as wechatId,mobile,brand_name as brandName,brand_img_url as brandImgUrl," +
-            "product_img_urls as productImgUrls,intro,is_ok as isOk,rec_unit as recUnit from f_collect " +
-            "where id = #{itemId} and collect_id = #{collectId}")
+    @Select("select reg_item as regItem from f_user_act " +
+            "where id = #{itemId} and act_id = #{collectId}")
     CDetailModel getDetail(@Param("itemId") long itemId, @Param("collectId") long collectId);
 
     @Update("update f_collect set product_first = #{url} where id = #{id}")

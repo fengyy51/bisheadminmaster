@@ -5,6 +5,7 @@ package com.binwang.bean.collect;
  */
 public class CListModel {
     private long id;
+    private String openId;
     private String regItem;
     private int isOk;
 //    private String recUnit;
@@ -35,4 +36,12 @@ public class CListModel {
     public String getRegItem() {
         return regItem;
     }
+
+    public String getOpenId() {
+        return openId;
+    }
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
 }

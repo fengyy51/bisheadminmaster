@@ -6,7 +6,7 @@ import com.binwang.bean.collect.CListModel;
 import java.util.List;
 
 /**
- * Created by owen on 17/7/13.
+ * Created by yy on 17/12/13.
  */
 public interface CollectService {
     List<CListModel> getList(long collectId, int type, int curPage, int pageSum);
