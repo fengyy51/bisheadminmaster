@@ -9,7 +9,7 @@ import java.util.List;
  * Created by yy on 17/12/13.
  */
 public interface CollectService {
-    List<CListModel> getList(long collectId, int type, int curPage, int pageSum);
+    List<CListModel> getList(long collectId, int type,String openId, int curPage, int pageSum);
 
     CDetailModel getDetail(long collectId, long itemId);
 

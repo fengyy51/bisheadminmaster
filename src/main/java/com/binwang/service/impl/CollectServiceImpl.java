@@ -25,9 +25,9 @@ public class CollectServiceImpl implements CollectService {
     private ICollectDao collectDao;
 
     @Override
-    public List<CListModel> getList(long collectId, int type, int curPage, int pageSum) {
+    public List<CListModel> getList(long collectId, int type, String openId,int curPage, int pageSum) {
         try {
-            List<CListModel> res = collectDao.getList(collectId, type, (curPage - 1) * pageSum, pageSum);
+            List<CListModel> res = collectDao.getList(collectId, type,openId, (curPage - 1) * pageSum, pageSum);
             return res;
         } catch (Exception e) {
             LOGGER.error("获取作品集列表失败，collectId为:" + collectId);

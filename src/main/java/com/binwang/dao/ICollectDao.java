@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 @Mapper
 public interface ICollectDao {
-    List<CListModel> getList(@Param("collectId") long collectId, @Param("type") int type, @Param("start") int start, @Param("pageSum") int pageSum);
+    List<CListModel> getList(@Param("collectId") long collectId, @Param("type") int type,@Param("openId")String openId, @Param("start") int start, @Param("pageSum") int pageSum);
 
     int listSum(@Param("collectId") long collectId, @Param("type") int type);
 

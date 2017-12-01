@@ -29,10 +29,11 @@ public class CollectController {
     @ResponseBody
     public Object list(@RequestParam("collectId") long collectId,
                        @RequestParam("type") int type,
+                       @RequestParam("openId") String openId,
                        @RequestParam("curPage") int curPage,
                        @RequestParam("pageSum") int pageSum) {
         try {
-            List<CListModel> list = collectService.getList(collectId, type, curPage, pageSum);
+            List<CListModel> list = collectService.getList(collectId, type,openId, curPage, pageSum);
             int sum = collectService.getListSum(collectId, type);
             int approveSum = collectService.getApproveSum(collectId);
             Map<String, Object> m = new HashMap<>();
