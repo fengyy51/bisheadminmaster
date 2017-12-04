@@ -1,5 +1,6 @@
 package com.binwang.controller;
 
+import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
 import com.binwang.service.CollectService;
@@ -72,6 +73,20 @@ public class CollectController {
             return ResponseUtil.okJSON(m);
         } catch (Exception e) {
             return ResponseUtil.errorJSON("更新审核状态出错");
+        }
+    }
+//投票设置
+    @RequestMapping(value = "/post-vote", method = RequestMethod.POST)
+    @ResponseBody
+    public Object VoteParamPost(VoteParam voteParam) {
+        try {
+            Boolean res = collectService.addVoteParam(voteParam);
+            Map<String, Boolean> m = new HashMap<>();
+            m.put("result", res);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            System.out.print(e);
+            return ResponseUtil.errorJSON("出错,确保序号存在");
         }
     }
 

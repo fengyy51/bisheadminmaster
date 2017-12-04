@@ -1,5 +1,6 @@
 package com.binwang.service.impl;
 
+import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
 import com.binwang.dao.ICollectDao;
@@ -15,7 +16,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by owen on 17/7/13.
+ * Created by yy on 17/7/13.
  */
 @Service
 public class CollectServiceImpl implements CollectService {
@@ -25,9 +26,9 @@ public class CollectServiceImpl implements CollectService {
     private ICollectDao collectDao;
 
     @Override
-    public List<CListModel> getList(long collectId, int type, String openId,int curPage, int pageSum) {
+    public List<CListModel> getList(long collectId, int type, String openId, int curPage, int pageSum) {
         try {
-            List<CListModel> res = collectDao.getList(collectId, type,openId, (curPage - 1) * pageSum, pageSum);
+            List<CListModel> res = collectDao.getList(collectId, type, openId, (curPage - 1) * pageSum, pageSum);
             return res;
         } catch (Exception e) {
             LOGGER.error("获取作品集列表失败，collectId为:" + collectId);
@@ -57,9 +58,9 @@ public class CollectServiceImpl implements CollectService {
     }
 
     @Override
-    public int getListSum(long collectId, int type,String openId) {
+    public int getListSum(long collectId, int type, String openId) {
         try {
-            return collectDao.listSum(collectId, type,openId);
+            return collectDao.listSum(collectId, type, openId);
         } catch (Exception e) {
             LOGGER.error("获取列表数量出错，collectId为：" + collectId);
             throw new RuntimeException("获取列表数量出错");
@@ -105,6 +106,26 @@ public class CollectServiceImpl implements CollectService {
                 return false;
         } catch (Exception e) {
             throw new RuntimeException("出错");
+        }
+    }
+
+    @Override
+    @Transactional
+    public Boolean addVoteParam(VoteParam voteParam) throws RuntimeException {
+        if (voteParam.getActId() <= 0)
+            throw new RuntimeException("参数不合法");
+        if (collectDao.getNum(voteParam.getActId()) > 0) {
+            if (collectDao.updateVoteParam(voteParam) > 0) {
+                return true;
+            } else {
+                throw new RuntimeException("更新投票设置失败，actid为" + voteParam.getActId());
+            }
+        } else {
+            if (collectDao.addVoteParam(voteParam) > 0) {
+                return true;
+            } else {
+                throw new RuntimeException("插入投票设置失败，actid为" + voteParam.getActId());
+            }
         }
     }
 }

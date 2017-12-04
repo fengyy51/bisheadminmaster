@@ -1,5 +1,6 @@
 package com.binwang.service;
 
+import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
 
@@ -22,5 +23,7 @@ public interface CollectService {
     Boolean firstImgUpdate(long id,String url);
 
     Boolean detailImgUpdate(long id, String urls);
+//    增加投票设置
+    Boolean addVoteParam(VoteParam voteParam);
 
 }

@@ -8,7 +8,7 @@ import com.binwang.bean.activity.SignListModel;
 import java.util.List;
 
 /**
- * Created by owen on 17/5/11.
+ * Created by yy
  */
 public interface ActivityService {
     Boolean add(ActParam actParam);

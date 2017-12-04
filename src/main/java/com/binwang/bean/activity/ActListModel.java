@@ -1,13 +1,14 @@
 package com.binwang.bean.activity;
 
 /**
- * Created by owen on 17/5/11.
+ * Created by yy
  */
 public class ActListModel {
     private Long id;
     private String name;
     private String begin;
     private String end;
+
 
     public ActListModel() {
     }

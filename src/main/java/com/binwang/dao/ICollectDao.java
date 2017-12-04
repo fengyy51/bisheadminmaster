@@ -1,11 +1,9 @@
 package com.binwang.dao;
 
+import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -36,4 +34,11 @@ public interface ICollectDao {
 
     @Update("update f_collect set product_img_urls = #{urls} where id = #{id}")
     int detailImgUpdate(@Param("id") long id, @Param("urls") String urls);
+//    增加投票配置
+    int addVoteParam(VoteParam voteParam);
+    @Select("select count(id) from vote_params where act_id=#{actId}")
+    int getNum(Long actId);
+
+    @Update("UPDATE vote_params SET begin=#{begin},end=#{end},pro_num=#{proNum},vote_num=#{voteNum},share_num=#{shareNum},vote_decoration=#{voteDecoration},pro_approved=#{proApproved} WHERE act_id=#{actId}")
+    int updateVoteParam(VoteParam voteParam);
 }
