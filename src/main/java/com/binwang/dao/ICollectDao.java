@@ -39,6 +39,6 @@ public interface ICollectDao {
     @Select("select count(id) from vote_params where act_id=#{actId}")
     int getNum(Long actId);
 
-    @Update("UPDATE vote_params SET act_name=#{actName},begin=#{begin},end=#{end},pro_num=#{proNum},vote_num=#{voteNum},share_num=#{shareNum},vote_decoration=#{voteDecoration},pro_approved=#{proApproved} WHERE act_id=#{actId}")
+    @Update("UPDATE vote_params SET act_name=#{actName},begin=#{begin},end=#{end},pro_num=#{proNum},vote_num=#{voteNum},share_num=#{shareNum},vote_max_num=#{voteMaxNum},vote_decoration=#{voteDecoration},pro_approved=#{proApproved} WHERE act_id=#{actId}")
     int updateVoteParam(VoteParam voteParam);
 }

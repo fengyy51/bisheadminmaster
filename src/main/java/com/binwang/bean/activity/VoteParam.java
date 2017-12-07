@@ -10,10 +10,11 @@ public class VoteParam
     private int proNum;
     private int voteNum;
     private String shareNum;
+    private int voteMaxNum;
     private String voteDecoration;
     private int proApproved;
     public VoteParam(){}
-    public VoteParam(Long id,String actName,Long actId,String begin,String end,int proNum,int voteNum,String shareNum,String voteDecoration,int proApproved){
+    public VoteParam(Long id,String actName,Long actId,String begin,String end,int proNum,int voteNum,int voteMaxNum,String shareNum,String voteDecoration,int proApproved){
         this.id=id;
         this.actName=actName;
         this.actId=actId;
@@ -21,6 +22,7 @@ public class VoteParam
         this.end=end;
         this.proNum=proNum;
         this.voteNum=voteNum;
+        this.voteMaxNum=voteMaxNum;
         this.shareNum=shareNum;
         this.voteDecoration=voteDecoration;
         this.proApproved=proApproved;
@@ -80,6 +82,14 @@ public class VoteParam
 
     public void setVoteNum(int voteNum) {
         this.voteNum = voteNum;
+    }
+
+    public int getVoteMaxNum() {
+        return voteMaxNum;
+    }
+
+    public void setVoteMaxNum(int voteMaxNum) {
+        this.voteMaxNum = voteMaxNum;
     }
 
     public void setId(Long id) {
