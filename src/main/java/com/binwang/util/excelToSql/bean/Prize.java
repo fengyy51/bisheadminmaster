@@ -5,6 +5,7 @@ package com.binwang.util.excelToSql.bean;
  */
 public class Prize {
     private int id;
+    private int relationId;
     private String name;
     private String info;
     private int ratio;
@@ -14,6 +15,14 @@ public class Prize {
     private String duijiang_loc;
 
     public Prize() {
+    }
+
+    public int getRelationId() {
+        return relationId;
+    }
+
+    public void setRelationId(int relationId) {
+        this.relationId = relationId;
     }
 
     public int getId() {

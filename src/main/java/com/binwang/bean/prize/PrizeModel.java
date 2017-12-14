@@ -1,7 +1,7 @@
 package com.binwang.bean.prize;
 
 /**
- * Created by owen on 17/8/17.
+ * Created by yy on 17/8/17.
  */
 public class PrizeModel {
     private int id;

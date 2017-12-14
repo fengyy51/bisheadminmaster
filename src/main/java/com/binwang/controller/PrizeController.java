@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by owen on 17/8/17.
+ * Created by yy on 17/8/17.
  */
 @Controller
 @RequestMapping("/prize")

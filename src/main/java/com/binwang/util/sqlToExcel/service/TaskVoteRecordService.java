@@ -14,7 +14,8 @@ import javax.mail.internet.MimeMessage;
 import java.io.File;
 
 /**
- * Created by owen on 17/8/24.
+ * Created by yy on 17/8/24.
+ * 监控投票情况，发送邮件
  */
 @Service
 public class TaskVoteRecordService {
