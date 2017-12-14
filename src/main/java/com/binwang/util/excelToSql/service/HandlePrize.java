@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.*;
+import java.util.Date;
 import java.util.Iterator;
 
 /**
@@ -113,6 +114,7 @@ public class HandlePrize {
                 XSSFSheet sheet = wb.getSheetAt(0);
                 Iterator<Row> rows = sheet.rowIterator();
                 rows.next();
+
                 while (rows.hasNext()) {
                     XSSFRow row = (XSSFRow) rows.next();
                     Prize p = new Prize();
@@ -181,8 +183,12 @@ public class HandlePrize {
                     }
 
                 }
-                File del = new File(f.toURI());
-                del.delete();
+                //删除上传的临时文件
+                ins.close();
+                System.gc();
+                if(f.exists()==true){
+                    System.out.println(f.delete());
+                }
                 System.out.println("over");
                 return true;
             }
