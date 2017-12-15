@@ -141,7 +141,7 @@ public class HandlePrize {
                                 p.setNum((int) cell.getNumericCellValue());
                                 break;
                             case 6:
-                                p.setType((int) cell.getNumericCellValue());
+                                p.setType(cell.getStringCellValue());
                                 break;
                             case 7:
                                 p.setDuijiang_time(cell.getStringCellValue());

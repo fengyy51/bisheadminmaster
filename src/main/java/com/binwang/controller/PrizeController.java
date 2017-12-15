@@ -23,16 +23,27 @@ public class PrizeController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public Object list(@RequestParam("type") int type,
-                       @RequestParam("relationId") int relationId) {
+    public Object list(@RequestParam("type") String type,
+                       @RequestParam("relationId") int relationId,
+                       @RequestParam("curPage") int curPage,
+                       @RequestParam("pageSum") int pageSum) {
         try {
             Map<String, Object> m = new HashMap<>();
-            if (type == 0)
-                m.put("list", prizeService.getOneAndTwo(relationId));
-            else if (type == 1)
-                m.put("list", prizeService.getThreeAndFour(relationId));
-            else
-                m.put("list", prizeService.getNoLimit(relationId));
+            m.put("list", prizeService.getList(type,relationId, curPage, pageSum));
+            int sum = prizeService.getListSum(type,relationId);
+            m.put("sum", sum);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            return ResponseUtil.errorJSON("出错");
+        }
+    }
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    @ResponseBody
+    public Object Search() {
+        try {
+            Map<String, Object> m = new HashMap<>();
+            m.put("relationId", prizeService.getRelationId());
+            m.put("type", prizeService.getType());
             return ResponseUtil.okJSON(m);
         } catch (Exception e) {
             return ResponseUtil.errorJSON("出错");
@@ -41,12 +52,30 @@ public class PrizeController {
 
     @RequestMapping(value = "/change-num", method = RequestMethod.POST)
     @ResponseBody
-    public Object changeSum(@RequestParam("id") int id,
+    public Object changeNum(@RequestParam("id") int id,
                             @RequestParam("num") int num,
-                            @RequestParam("relationId") int relationId) {
+                            @RequestParam("relationId") int relationId,
+                            @RequestParam("name")String name,
+                            @RequestParam("type")String type,
+                            @RequestParam("ratio")int ratio,
+                            @RequestParam("info")String info,
+                            @RequestParam("duijiangTime")String duijiangTime,
+                            @RequestParam("duijiangLoc")String duijiangLoc) {
         try {
             Map<String, Boolean> m = new HashMap<>();
-            m.put("result", prizeService.changeNoLimitNum(relationId, num, id));
+            m.put("result", prizeService.changeNum(relationId, num, id,name,type,ratio,info,duijiangTime,duijiangLoc));
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            return ResponseUtil.errorJSON("出错");
+        }
+    }
+
+    @RequestMapping(value = "/param/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public Object ParamDelete(@RequestParam("id") int id) {
+        try {
+            Map<String, Boolean> m = new HashMap<>();
+            m.put("result", prizeService.paramDelete(id));
             return ResponseUtil.okJSON(m);
         } catch (Exception e) {
             return ResponseUtil.errorJSON("出错");

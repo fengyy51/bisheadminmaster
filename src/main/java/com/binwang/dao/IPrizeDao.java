@@ -1,10 +1,7 @@
 package com.binwang.dao;
 
 import com.binwang.bean.prize.PrizeModel;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,6 +23,17 @@ public interface IPrizeDao {
 
     List<PrizeModel> getNoLimitPrize(@Param("list") List<Integer> ids, @Param("relationId") int relationId);
 
-    @Update("update prize set num = #{num} where id = #{id} and relation_id = #{relationId}")
-    int updateNum(@Param("num") int num, @Param("id") int id, @Param("relationId") int relationId);
+    @Update("update prize set num = #{num},name=#{name},info=#{info},ratio=#{ratio},type=#{type},duijiang_time=#{duijiangTime},duijiang_loc=#{duijiangLoc} where id = #{id} and relation_id = #{relationId}")
+    int updateNum(@Param("num") int num, @Param("id") int id, @Param("relationId") int relationId,@Param("name") String name,@Param("type") String type,@Param("ratio") int ratio,@Param("info") String info,@Param("duijiangTime") String duijiangTime,@Param("duijiangLoc") String duijiangLoc);
+
+    @Delete("delete from prize where id=#{id}")
+    int paramDelete(@Param("id") int id);
+    List<PrizeModel>getList(@Param("type")String type,@Param("relationId")int relationId, @Param("start") int start, @Param("pageSum") int pageSum);
+
+    int getListSum(@Param("type")String type,@Param("relationId")int relationId);
+    @Select("select distinct relation_id from prize ")
+    List<Integer>getRelationId();
+
+    @Select("select distinct type from prize")
+    List<String>getType();
 }

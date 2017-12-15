@@ -10,7 +10,7 @@ public class Prize {
     private String info;
     private int ratio;
     private int num;
-    private int type;
+    private String type;
     private String duijiang_time;
     private String duijiang_loc;
 
@@ -65,11 +65,11 @@ public class Prize {
         this.num = num;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
