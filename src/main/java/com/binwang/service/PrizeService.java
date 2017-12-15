@@ -1,6 +1,7 @@
 package com.binwang.service;
 
 import com.binwang.bean.prize.PrizeModel;
+import com.binwang.bean.prize.PrizeParam;
 
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface PrizeService {
     Boolean paramDelete(int id);
     List<Integer> getRelationId();
     List<String> getType();
+    Boolean addPrizeParam(PrizeParam prizeParam);
 }

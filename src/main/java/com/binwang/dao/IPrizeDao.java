@@ -1,6 +1,7 @@
 package com.binwang.dao;
 
 import com.binwang.bean.prize.PrizeModel;
+import com.binwang.bean.prize.PrizeParam;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -36,4 +37,6 @@ public interface IPrizeDao {
 
     @Select("select distinct type from prize")
     List<String>getType();
+
+    int addPrizeParam(PrizeParam prizeParam);
 }

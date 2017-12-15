@@ -1,5 +1,6 @@
 package com.binwang.controller;
 
+import com.binwang.bean.prize.PrizeParam;
 import com.binwang.service.PrizeService;
 import com.binwang.util.ResponseUtil;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ public class PrizeController {
             return ResponseUtil.errorJSON("出错");
         }
     }
+    //抽奖奖项，关联活动获取
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ResponseBody
     public Object Search() {
@@ -49,7 +51,7 @@ public class PrizeController {
             return ResponseUtil.errorJSON("出错");
         }
     }
-
+    //抽奖奖品数据修改
     @RequestMapping(value = "/change-num", method = RequestMethod.POST)
     @ResponseBody
     public Object changeNum(@RequestParam("id") int id,
@@ -69,7 +71,7 @@ public class PrizeController {
             return ResponseUtil.errorJSON("出错");
         }
     }
-
+//抽奖奖品数据删除
     @RequestMapping(value = "/param/delete", method = RequestMethod.POST)
     @ResponseBody
     public Object ParamDelete(@RequestParam("id") int id) {
@@ -81,4 +83,19 @@ public class PrizeController {
             return ResponseUtil.errorJSON("出错");
         }
     }
+    //抽奖设置
+    @RequestMapping(value = "/post-prize-param", method = RequestMethod.POST)
+    @ResponseBody
+    public Object PrizeParamPost(PrizeParam prizeParam) {
+        try {
+            Boolean res = prizeService.addPrizeParam(prizeParam);
+            Map<String, Boolean> m = new HashMap<>();
+            m.put("result", res);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            System.out.print(e);
+            return ResponseUtil.errorJSON("增加抽奖设置出错");
+        }
+    }
+
 }

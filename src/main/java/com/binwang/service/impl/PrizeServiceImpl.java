@@ -1,8 +1,10 @@
 package com.binwang.service.impl;
 
 import com.binwang.bean.prize.PrizeModel;
+import com.binwang.bean.prize.PrizeParam;
 import com.binwang.dao.IPrizeDao;
 import com.binwang.service.PrizeService;
+import com.binwang.util.excelToSql.bean.Prize;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -104,4 +106,14 @@ public class PrizeServiceImpl implements PrizeService {
     public List<String> getType(){
         return prizeDao.getType();
     }
+    @Override
+    @Transactional
+    public Boolean addPrizeParam(PrizeParam prizeParam){
+        if(prizeDao.addPrizeParam(prizeParam)>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
