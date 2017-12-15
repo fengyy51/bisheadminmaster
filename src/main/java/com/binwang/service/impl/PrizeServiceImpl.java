@@ -59,18 +59,18 @@ public class PrizeServiceImpl implements PrizeService {
     }
     @Override
     @Transactional
-    public List<PrizeModel>getList(String type,int relationId, int curPage, int pageSum){
-        return prizeDao.getList(type,relationId,(curPage - 1) * pageSum, pageSum);
+    public List<PrizeModel>getList(String type,String actName, int curPage, int pageSum){
+        return prizeDao.getList(type,actName,(curPage - 1) * pageSum, pageSum);
     }
     @Override
     @Transactional
-    public int getListSum(String type,int relationId){
-        return prizeDao.getListSum(type,relationId);
+    public int getListSum(String type,String actName){
+        return prizeDao.getListSum(type,actName);
     }
 
     @Override
     @Transactional
-    public Boolean changeNum(int collectId, int num, int id,String name,String type,int ratio,String info,String duijiangTime,String duijiangLoc) {
+    public Boolean changeNum(String actName, int num, int id,String name,String type,int ratio,String info,String duijiangTime,String duijiangLoc) {
 //        String[] idArray = IDS.split(",");
 //        Boolean flag = false;
 //        for (int i = 0; i < idArray.length; i++) {
@@ -79,7 +79,7 @@ public class PrizeServiceImpl implements PrizeService {
 //        }
 //        if (flag) {
             //id在不限量内可以修改
-            if (prizeDao.updateNum(num, id,collectId,name,type,ratio,info,duijiangTime,duijiangLoc) > 0)
+            if (prizeDao.updateNum(num, id,actName,name,type,ratio,info,duijiangTime,duijiangLoc) > 0)
                 return true;
             else
                 return false;
@@ -98,8 +98,8 @@ public class PrizeServiceImpl implements PrizeService {
     }
     @Override
     @Transactional
-    public List<Integer> getRelationId(){
-        return prizeDao.getRelationId();
+    public List<String> getActName(){
+        return prizeDao.getActName();
     }
     @Override
     @Transactional

@@ -8,7 +8,7 @@ public class PrizeModel {
     private String type;
     private String name;
     private int num;
-    private int relationId;
+    private String actName;
     private String info;
     private int ratio;
     private String duijiangTime;
@@ -17,7 +17,7 @@ public class PrizeModel {
     public PrizeModel() {
     }
 
-    public PrizeModel(int id, String type, String name, int num,int relationId,String info,int ratio,String duijiangLoc,String duijiangTime) {
+    public PrizeModel(int id, String type, String name, int num,String actName,String info,int ratio,String duijiangLoc,String duijiangTime) {
         this.id = id;
         this.type = type;
         this.name = name;
@@ -25,7 +25,7 @@ public class PrizeModel {
         this.duijiangLoc=duijiangLoc;
         this.duijiangTime=duijiangTime;
         this.ratio=ratio;
-        this.relationId=relationId;
+        this.actName=actName;
         this.info=info;
     }
 
@@ -61,12 +61,12 @@ public class PrizeModel {
         this.num = num;
     }
 
-    public void setRelationId(int relationId) {
-        this.relationId = relationId;
+    public String getActName() {
+        return actName;
     }
 
-    public int getRelationId() {
-        return relationId;
+    public void setActName(String actName) {
+        this.actName = actName;
     }
 
     public int getRatio() {

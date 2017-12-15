@@ -125,7 +125,7 @@ public class HandlePrize {
                         switch (count) {
                             case 1:
 //                                System.out.println(cell.getNumericCellValue());
-                                p.setRelationId((int) cell.getNumericCellValue());
+                                p.setActName(cell.getStringCellValue());
                                 break;
                             case 2:
 //                                System.out.println(cell.getStringCellValue());
@@ -154,13 +154,12 @@ public class HandlePrize {
                         }
                         count++;
                     }
-                    System.out.println(p.getRelationId());
                     System.out.println(p.getName());
                     System.out.println(p.getInfo());
                     System.out.println(p.getNum());
                     System.out.println(p.getDuijiang_time());
                     System.out.println(p.getDuijiang_loc());
-                    int num=prizeDao.getPrize(p.getRelationId(),p.getName());
+                    int num=prizeDao.getPrize(p.getActName(),p.getName());
                     if(num>0){
                         System.out.println("update");
                         int res=prizeDao.updatePrize(p);

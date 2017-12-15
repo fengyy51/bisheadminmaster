@@ -15,12 +15,12 @@ public interface PrizeService {
 
     List<PrizeModel> getNoLimit(int collectId);
 
-    List<PrizeModel>getList(String type,int relationId, int curPage, int pageSum);
-    int getListSum(String type,int relationId);
+    List<PrizeModel>getList(String type,String actName, int curPage, int pageSum);
+    int getListSum(String type,String actName);
 
-    Boolean changeNum(int collectId, int num, int id,String name,String type,int ratio,String info,String duijiangTime,String duijiangLoc);
+    Boolean changeNum(String actName, int num, int id,String name,String type,int ratio,String info,String duijiangTime,String duijiangLoc);
     Boolean paramDelete(int id);
-    List<Integer> getRelationId();
+    List<String> getActName();
     List<String> getType();
     Boolean addPrizeParam(PrizeParam prizeParam);
 }

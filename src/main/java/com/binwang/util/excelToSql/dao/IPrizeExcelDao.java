@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface IPrizeExcelDao {
-    @Insert("insert into prize(relation_id,name,info,ratio,num,type,duijiang_time,duijiang_loc) values(#{relationId},#{name},#{info}," +
+    @Insert("insert into prize(act_name,name,info,ratio,num,type,duijiang_time,duijiang_loc) values(#{actName},#{name},#{info}," +
             "#{ratio},#{num},#{type},#{duijiang_time},#{duijiang_loc})")
     int insertPrize(Prize prize);
 
-    @Select("select count(id) from prize where relation_id=#{relationId} and name=#{name}")
-    int getPrize(@Param("relationId") int relationId,@Param("name")String name);
+    @Select("select count(id) from prize where act_name=#{actName} and name=#{name}")
+    int getPrize(@Param("actName") String actName,@Param("name")String name);
 
-    @Update("update prize set info = #{info},ratio=#{ratio},num=#{num},type=#{type},duijiang_time=#{duijiang_time},duijiang_loc=#{duijiang_loc} where relation_id = #{relationId} and name=#{name}")
+    @Update("update prize set info = #{info},ratio=#{ratio},num=#{num},type=#{type},duijiang_time=#{duijiang_time},duijiang_loc=#{duijiang_loc} where act_name = #{actName} and name=#{name}")
     int updatePrize(Prize prize);
 }

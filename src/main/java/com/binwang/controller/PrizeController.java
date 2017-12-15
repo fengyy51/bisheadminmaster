@@ -25,13 +25,13 @@ public class PrizeController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public Object list(@RequestParam("type") String type,
-                       @RequestParam("relationId") int relationId,
+                       @RequestParam("actName") String actName,
                        @RequestParam("curPage") int curPage,
                        @RequestParam("pageSum") int pageSum) {
         try {
             Map<String, Object> m = new HashMap<>();
-            m.put("list", prizeService.getList(type,relationId, curPage, pageSum));
-            int sum = prizeService.getListSum(type,relationId);
+            m.put("list", prizeService.getList(type,actName, curPage, pageSum));
+            int sum = prizeService.getListSum(type,actName);
             m.put("sum", sum);
             return ResponseUtil.okJSON(m);
         } catch (Exception e) {
@@ -44,7 +44,7 @@ public class PrizeController {
     public Object Search() {
         try {
             Map<String, Object> m = new HashMap<>();
-            m.put("relationId", prizeService.getRelationId());
+            m.put("actName", prizeService.getActName());
             m.put("type", prizeService.getType());
             return ResponseUtil.okJSON(m);
         } catch (Exception e) {
@@ -56,7 +56,7 @@ public class PrizeController {
     @ResponseBody
     public Object changeNum(@RequestParam("id") int id,
                             @RequestParam("num") int num,
-                            @RequestParam("relationId") int relationId,
+                            @RequestParam("actName") String actName,
                             @RequestParam("name")String name,
                             @RequestParam("type")String type,
                             @RequestParam("ratio")int ratio,
@@ -65,7 +65,7 @@ public class PrizeController {
                             @RequestParam("duijiangLoc")String duijiangLoc) {
         try {
             Map<String, Boolean> m = new HashMap<>();
-            m.put("result", prizeService.changeNum(relationId, num, id,name,type,ratio,info,duijiangTime,duijiangLoc));
+            m.put("result", prizeService.changeNum(actName, num, id,name,type,ratio,info,duijiangTime,duijiangLoc));
             return ResponseUtil.okJSON(m);
         } catch (Exception e) {
             return ResponseUtil.errorJSON("出错");
