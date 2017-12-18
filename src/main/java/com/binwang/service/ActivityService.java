@@ -14,7 +14,7 @@ public interface ActivityService {
     Boolean add(ActParam actParam);
     Boolean regitemadd(RegItemListModel regItemListModel);
     List<ActListModel> list(int curPage, int pageSum, String name,String username, String begin, String end);
-    int listSum(String username,String name, String begin, String end);
+    int listSum(String name,String username, String begin, String end);
     List<RegItemListModel> regitemlist(int curPage, int pageSum,String username);
     int reglistSum(String username);
     List<RegItemListModel> actregitemlist(String username);

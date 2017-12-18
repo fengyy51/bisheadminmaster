@@ -1,8 +1,10 @@
 package com.binwang.service.impl;
 
+import com.binwang.bean.prize.PrizeListModel;
 import com.binwang.bean.prize.PrizeModel;
 import com.binwang.bean.prize.PrizeParam;
 import com.binwang.dao.IPrizeDao;
+import com.binwang.exception.UserException;
 import com.binwang.service.PrizeService;
 import com.binwang.util.excelToSql.bean.Prize;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,6 +58,24 @@ public class PrizeServiceImpl implements PrizeService {
             lIds.add(Integer.parseInt(idArray[i]));
         }
         return prizeDao.getNoLimitPrize(lIds, collectId);
+    }
+    //抽奖活动列表
+    @Override
+    public List<PrizeListModel> list(int curPage, int pageSum, String name,String username, String begin, String end) {
+        try {
+            List<PrizeListModel> res = prizeDao.listPrize(name, username,begin, end, (curPage - 1) * pageSum, pageSum);
+            return res;
+        } catch (Exception e) {
+            throw new UserException("获取抽奖活动列表失败！");
+        }
+    }
+    @Override
+    public int listSum(String name,String username, String begin, String end) {
+        try {
+            return prizeDao.listPrizeSum(name,username ,begin, end);
+        } catch (Exception e) {
+            throw new UserException("获取抽奖活动列表数量失败!");
+        }
     }
     @Override
     @Transactional
@@ -115,5 +135,27 @@ public class PrizeServiceImpl implements PrizeService {
             return false;
         }
     }
-
+    @Override
+    @Transactional
+    public PrizeParam getPrizeParam(int id){
+        return prizeDao.getPrizeParam(id);
+    }
+    @Override
+    @Transactional
+    public Boolean editPrizeParam(PrizeParam prizeParam){
+        if(prizeDao.editPrizeParam(prizeParam)>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    @Override
+    @Transactional
+    public Boolean deletePrizeParam(int id){
+        if(prizeDao.deletePrizeParam(id)>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

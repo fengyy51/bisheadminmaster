@@ -116,15 +116,15 @@ public class ActivityController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public Object list(@RequestParam(value="username") String username,
-                       @RequestParam(value = "curPage") int curPage,
+    public Object list(@RequestParam(value = "curPage") int curPage,
                        @RequestParam(value = "pageSum") int pageSum,
                        @RequestParam(value = "name", required = false, defaultValue = "") String name,
+                       @RequestParam(value="username") String username,
                        @RequestParam(value = "begin", required = false, defaultValue = "") String begin,
                        @RequestParam(value = "end", required = false, defaultValue = "") String end) {
         try {
             List<ActListModel> res = activityService.list(curPage, pageSum, name,username, begin, end);
-            int sum = activityService.listSum(username,name, begin, end);
+            int sum = activityService.listSum(name,username, begin, end);
             HashMap<String, Object> m = new HashMap<>();
             m.put("list", res);
             m.put("sum", sum);

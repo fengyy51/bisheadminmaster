@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by owen on 17/5/11.
+ * Created by yy on 17/5/11.
  */
 public class ActParam {
     private String username;//系统的使用者

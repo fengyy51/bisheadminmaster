@@ -1,5 +1,6 @@
 package com.binwang.dao;
 
+import com.binwang.bean.prize.PrizeListModel;
 import com.binwang.bean.prize.PrizeModel;
 import com.binwang.bean.prize.PrizeParam;
 import org.apache.ibatis.annotations.*;
@@ -32,11 +33,23 @@ public interface IPrizeDao {
     List<PrizeModel>getList(@Param("type")String type,@Param("actName")String actName, @Param("start") int start, @Param("pageSum") int pageSum);
 
     int getListSum(@Param("type")String type,@Param("actName")String actName);
-    @Select("select distinct act_name from prize ")
+    @Select("select distinct name from prize_params ")
     List<String>getActName();
+
+    List<PrizeListModel> listPrize(@Param("name") String name, @Param("username")String username, @Param("begin") String begin, @Param("end") String end,
+                                 @Param("start") int start, @Param("pageSum") int pageSum);
+
+    int listPrizeSum(@Param("name") String name,@Param("username")String username, @Param("begin") String begin, @Param("end") String end);
 
     @Select("select distinct type from prize")
     List<String>getType();
 
     int addPrizeParam(PrizeParam prizeParam);
+
+    @Select("select id,begin,end,prize_num,share_num,prize_decoration,name,prize_max_num from prize_params where id=#{id}")
+    PrizeParam getPrizeParam(int id);
+
+    int editPrizeParam(PrizeParam prizeParam);
+    @Delete("delete from prize_params where id=#{id}")
+    int deletePrizeParam(int id);
 }

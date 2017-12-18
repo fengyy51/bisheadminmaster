@@ -1,8 +1,9 @@
 package com.binwang.bean.prize;
 
 public class PrizeParam {
+    private String username;//系统的使用者
     private Long id;
-    private String actName;
+    private String name;
     private Long actId;
     private String begin;
     private String end;
@@ -11,9 +12,10 @@ public class PrizeParam {
     private int prizeMaxNum;
     private String prizeDecoration;
     public PrizeParam(){}
-    public PrizeParam(Long id,String actName,Long actId,String begin,String end,int prizeNum,int prizeMaxNum,String shareNum,String prizeDecoration){
+    public PrizeParam(Long id,String name,String username,Long actId,String begin,String end,int prizeNum,int prizeMaxNum,String shareNum,String prizeDecoration){
         this.id=id;
-        this.actName=actName;
+        this.name=name;
+        this.username=username;
         this.actId=actId;
         this.begin=begin;
         this.end=end;
@@ -21,6 +23,14 @@ public class PrizeParam {
         this.prizeMaxNum=prizeMaxNum;
         this.shareNum=shareNum;
         this.prizeDecoration=prizeDecoration;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getShareNum() {
@@ -62,12 +72,13 @@ public class PrizeParam {
     public Long getId() {
         return id;
     }
-    public String getActName() {
-        return actName;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setActName(String actName) {
-        this.actName = actName;
+    public String getName() {
+        return name;
     }
 
     public int getPrizeMaxNum() {
