@@ -28,8 +28,8 @@ public class RedisConfig {
     private int port;
     @Value("${spring.redis.timeout}")
     private int timeout;
-    @Value("${spring.redis.password}")
-    private String password;
+//    @Value("${spring.redis.password}")
+//    private String password;
     @Value("${spring.redis.database}")
     private int database;
     @Value("${spring.redis.pool.max-active}")
@@ -65,7 +65,7 @@ public class RedisConfig {
         JedisConnectionFactory factory = new JedisConnectionFactory();
         factory.setHostName(host);
         factory.setPort(port);
-        factory.setPassword(password);
+//        factory.setPassword(password);
         factory.setTimeout(timeout);
         factory.setDatabase(database);
         JedisPoolConfig config = new JedisPoolConfig();

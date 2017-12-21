@@ -7,18 +7,20 @@ public class PrizeParam {
     private Long actId;
     private String begin;
     private String end;
+    private String code;
     private int prizeNum;
     private String shareNum;
     private int prizeMaxNum;
     private String prizeDecoration;
     public PrizeParam(){}
-    public PrizeParam(Long id,String name,String username,Long actId,String begin,String end,int prizeNum,int prizeMaxNum,String shareNum,String prizeDecoration){
+    public PrizeParam(Long id,String name,String username,Long actId,String begin,String end,String code,int prizeNum,int prizeMaxNum,String shareNum,String prizeDecoration){
         this.id=id;
         this.name=name;
         this.username=username;
         this.actId=actId;
         this.begin=begin;
         this.end=end;
+        this.code=code;
         this.prizeNum=prizeNum;
         this.prizeMaxNum=prizeMaxNum;
         this.shareNum=shareNum;
@@ -103,5 +105,13 @@ public class PrizeParam {
 
     public void setPrizeNum(int prizeNum) {
         this.prizeNum = prizeNum;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

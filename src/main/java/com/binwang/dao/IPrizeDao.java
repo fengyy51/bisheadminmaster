@@ -46,7 +46,7 @@ public interface IPrizeDao {
 
     int addPrizeParam(PrizeParam prizeParam);
 
-    @Select("select id,begin,end,prize_num,share_num,prize_decoration,name,prize_max_num from prize_params where id=#{id}")
+    @Select("select id,begin,end,code,prize_num as prizeNum,share_num as shareNum,prize_decoration as prizeDecoration,name,prize_max_num as prizeMaxNum from prize_params where id=#{id}")
     PrizeParam getPrizeParam(int id);
 
     int editPrizeParam(PrizeParam prizeParam);
