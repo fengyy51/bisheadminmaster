@@ -3,6 +3,7 @@ package com.binwang.dao;
 import com.binwang.bean.prize.PrizeListModel;
 import com.binwang.bean.prize.PrizeModel;
 import com.binwang.bean.prize.PrizeParam;
+import com.binwang.bean.prize.PrizeUserModel;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -52,4 +53,10 @@ public interface IPrizeDao {
     int editPrizeParam(PrizeParam prizeParam);
     @Delete("delete from prize_params where id=#{id}")
     int deletePrizeParam(int id);
+
+    //用户列表
+    List<PrizeUserModel> userList(@Param("actId") long actId, @Param("code") String code, @Param("isUse") int isUse,
+                                 @Param("start") int start, @Param("pageSum") int pageSum);
+
+    int userListSum(@Param("actId") long actId, @Param("code") String code, @Param("isUse") int isUse);
 }

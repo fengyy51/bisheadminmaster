@@ -3,6 +3,7 @@ package com.binwang.service;
 import com.binwang.bean.prize.PrizeListModel;
 import com.binwang.bean.prize.PrizeModel;
 import com.binwang.bean.prize.PrizeParam;
+import com.binwang.bean.prize.PrizeUserModel;
 
 import java.util.List;
 
@@ -31,5 +32,8 @@ public interface PrizeService {
     PrizeParam getPrizeParam(int id);
     Boolean editPrizeParam(PrizeParam prizeParam);
     Boolean deletePrizeParam(int id);
+    //抽奖活动用户列表获取
+    List<PrizeUserModel> userList(int curPage, int pageSum, long actId, String code, int isUse);
+    int userListSum(long actId, String code, int isUse);
 
 }

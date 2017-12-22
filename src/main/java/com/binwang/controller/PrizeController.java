@@ -2,6 +2,7 @@ package com.binwang.controller;
 
 import com.binwang.bean.prize.PrizeListModel;
 import com.binwang.bean.prize.PrizeParam;
+import com.binwang.bean.prize.PrizeUserModel;
 import com.binwang.service.PrizeService;
 import com.binwang.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -155,6 +156,28 @@ public class PrizeController {
             int sum = prizeService.listSum(name,username, begin, end);
             System.out.println(username);
             System.out.println(sum);
+            HashMap<String, Object> m = new HashMap<>();
+            m.put("list", res);
+            m.put("sum", sum);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseUtil.errorJSON(e.getMessage());
+        }
+    }
+    //抽奖用户列表获取
+    @RequestMapping(value = "/list-user", method = RequestMethod.GET)
+    @ResponseBody
+    public Object PrizeUserlist(
+            @RequestParam(value = "curPage") int curPage,
+            @RequestParam(value = "pageSum") int pageSum,
+            @RequestParam(value = "actId") long actId,
+            @RequestParam(value = "isUse") int isUse,
+            @RequestParam(value = "code", required = false, defaultValue = "") String code) {
+        try {
+//            System.out.println("actID"+actId);
+            List<PrizeUserModel> res = prizeService.userList(curPage, pageSum, actId, code, isUse);
+            int sum = prizeService.userListSum(actId, code, isUse);
             HashMap<String, Object> m = new HashMap<>();
             m.put("list", res);
             m.put("sum", sum);

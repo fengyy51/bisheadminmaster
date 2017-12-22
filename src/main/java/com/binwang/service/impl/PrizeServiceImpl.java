@@ -3,6 +3,7 @@ package com.binwang.service.impl;
 import com.binwang.bean.prize.PrizeListModel;
 import com.binwang.bean.prize.PrizeModel;
 import com.binwang.bean.prize.PrizeParam;
+import com.binwang.bean.prize.PrizeUserModel;
 import com.binwang.dao.IPrizeDao;
 import com.binwang.exception.UserException;
 import com.binwang.service.PrizeService;
@@ -156,6 +157,26 @@ public class PrizeServiceImpl implements PrizeService {
             return true;
         }else{
             return false;
+        }
+    }
+    //抽奖活动用户列表获取
+    @Override
+    @Transactional
+    public List<PrizeUserModel>  userList(int curPage, int pageSum, long actId, String code, int isUse){
+        try {
+            List<PrizeUserModel> res = prizeDao.userList(actId, code, isUse, (curPage - 1) * pageSum, pageSum);
+            return res;
+        } catch (Exception e) {
+            throw new UserException("获取抽奖用户列表失败！");
+        }
+    }
+    @Override
+    @Transactional
+    public int userListSum(long actId, String code, int isUse){
+        try {
+            return prizeDao.userListSum(actId, code, isUse);
+        } catch (Exception e) {
+            throw new UserException("获取抽奖用户列表数量失败!");
         }
     }
 }
