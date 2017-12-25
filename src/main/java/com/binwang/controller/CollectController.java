@@ -3,8 +3,12 @@ package com.binwang.controller;
 import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
+import com.binwang.bean.collect.VoteListModel;
+import com.binwang.bean.collect.VoteUserModel;
 import com.binwang.service.CollectService;
 import com.binwang.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,13 +20,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Created by yy on 17/11/13.
  */
 @Controller
 @RequestMapping("/collect")
 public class CollectController {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(CollectController.class);
     @Resource
     private CollectService collectService;
 
@@ -117,4 +122,50 @@ public class CollectController {
             return ResponseUtil.errorJSON("出错,确保序号存在");
         }
     }
+    //投票列表
+    @RequestMapping(value = "/list-vote", method = RequestMethod.GET)
+    @ResponseBody
+    public Object votelist(
+            @RequestParam(value = "curPage") int curPage,
+            @RequestParam(value = "pageSum") int pageSum,
+            @RequestParam(value = "actName", required = false, defaultValue = "") String actName,
+            @RequestParam(value="username") String username,
+            @RequestParam(value = "begin", required = false, defaultValue = "") String begin,
+            @RequestParam(value = "end", required = false, defaultValue = "") String end) {
+        try {
+            List<VoteListModel> res = collectService.listVote(curPage, pageSum, actName,username, begin, end);
+            int sum = collectService.listVoteSum(actName,username, begin, end);
+            System.out.println(username);
+            System.out.println(sum);
+            HashMap<String, Object> m = new HashMap<>();
+            m.put("list", res);
+            m.put("sum", sum);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseUtil.errorJSON(e.getMessage());
+        }
+    }
+    //投票用户列表获取
+//    @RequestMapping(value = "/list-vote-user", method = RequestMethod.GET)
+//    @ResponseBody
+//    public Object VoteUserlist(
+//            @RequestParam(value = "curPage") int curPage,
+//            @RequestParam(value = "pageSum") int pageSum,
+//            @RequestParam(value = "actId") long actId,
+//            @RequestParam(value = "isUse") int isUse,
+//            @RequestParam(value = "code", required = false, defaultValue = "") String code) {
+//        try {
+//            List<VoteUserModel> res = collectService.userList(curPage, pageSum, actId, code, isUse);
+//            int sum = collectService.userListSum(actId, code, isUse);
+//            HashMap<String, Object> m = new HashMap<>();
+//            m.put("list", res);
+//            m.put("sum", sum);
+//            return ResponseUtil.okJSON(m);
+//        } catch (Exception e) {
+//            LOGGER.error(e.getMessage());
+//            return ResponseUtil.errorJSON(e.getMessage());
+//        }
+//    }
+
 }

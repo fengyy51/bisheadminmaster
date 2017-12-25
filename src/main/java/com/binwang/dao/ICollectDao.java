@@ -3,6 +3,7 @@ package com.binwang.dao;
 import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
+import com.binwang.bean.collect.VoteListModel;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -41,4 +42,11 @@ public interface ICollectDao {
 
     @Update("UPDATE vote_params SET act_name=#{actName},begin=#{begin},end=#{end},pro_num=#{proNum},vote_num=#{voteNum},share_num=#{shareNum},vote_max_num=#{voteMaxNum},vote_decoration=#{voteDecoration},pro_approved=#{proApproved} WHERE act_id=#{actId}")
     int updateVoteParam(VoteParam voteParam);
+    //投票活动列表
+
+    List<VoteListModel> listVote(@Param("actName") String actName, @Param("username")String username, @Param("begin") String begin, @Param("end") String end,
+                                  @Param("start") int start, @Param("pageSum") int pageSum);
+
+    int listVoteSum(@Param("actName") String actName,@Param("username")String username, @Param("begin") String begin, @Param("end") String end);
+
 }

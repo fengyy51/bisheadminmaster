@@ -3,6 +3,7 @@ package com.binwang.service;
 import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
+import com.binwang.bean.collect.VoteListModel;
 
 import java.util.List;
 
@@ -25,5 +26,8 @@ public interface CollectService {
     Boolean detailImgUpdate(long id, String urls);
 //    增加投票设置
     Boolean addVoteParam(VoteParam voteParam);
+    //投票列表
+    List<VoteListModel>listVote(int curPage, int pageSum, String actName, String username, String begin, String end);
+    int listVoteSum(String actName,String username, String begin, String end);
 
 }

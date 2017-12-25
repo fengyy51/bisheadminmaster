@@ -3,6 +3,7 @@ package com.binwang.service.impl;
 import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
+import com.binwang.bean.collect.VoteListModel;
 import com.binwang.dao.ICollectDao;
 import com.binwang.exception.UserException;
 import com.binwang.service.CollectService;
@@ -128,4 +129,26 @@ public class CollectServiceImpl implements CollectService {
             }
         }
     }
+    @Override
+    @Transactional
+    public List<VoteListModel>listVote(int curPage, int pageSum, String actName, String username, String begin, String end){
+        try {
+            List<VoteListModel> res = collectDao.listVote(actName, username,begin, end, (curPage - 1) * pageSum, pageSum);
+            return res;
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new UserException("获取投票活动列表失败！");
+        }
+    }
+
+    @Override
+    @Transactional
+    public int listVoteSum(String actName,String username, String begin, String end) {
+        try {
+            return collectDao.listVoteSum(actName,username ,begin, end);
+        } catch (Exception e) {
+            throw new UserException("获取投票活动列表数量失败!");
+        }
+    }
+
 }

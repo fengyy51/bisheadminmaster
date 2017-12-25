@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * Created by owen on 17/8/16.
+ * Created by yy on 17/8/16. 定时任务
  */
 @Component
 public class PrizeOpenTask {

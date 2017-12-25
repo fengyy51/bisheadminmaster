@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by owen on 17/5/3.
+ * Created by yy on 17/5/3.
  */
 @Controller
 @RequestMapping("/notice")
