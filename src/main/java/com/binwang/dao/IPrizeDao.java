@@ -47,13 +47,13 @@ public interface IPrizeDao {
 
     int addPrizeParam(PrizeParam prizeParam);
 
-    @Select("select id,begin,end,code,prize_num as prizeNum,share_num as shareNum,prize_decoration as prizeDecoration,name,prize_max_num as prizeMaxNum,top_img as topImg,prizelist_img as prizelistImg from prize_params where id=#{id}")
+    @Select("select id,begin,end,code,prize_num as prizeNum,share_num as shareNum,prize_decoration as prizeDecoration,name,prize_max_num as prizeMaxNum,top_img as topImg,prizelist_img as prizelistImg,color from prize_params where id=#{id}")
     PrizeParam getPrizeParam(int id);
 
 
     @Update("UPDATE prize_params set name=#{name},begin = #{begin},end=#{end},code=#{code},prize_num=#{prizeNum},"+
             "share_num=#{shareNum},prize_max_num=#{prizeMaxNum},prize_decoration=#{prizeDecoration},"+
-            "top_img=#{topImg},prizelist_img=#{prizelistImg} where id = #{id}")
+            "top_img=#{topImg},prizelist_img=#{prizelistImg},color=#{color} where id = #{id}")
     int editPrizeParam(PrizeParam prizeParam);
 
     @Delete("delete from prize_params where id=#{id}")

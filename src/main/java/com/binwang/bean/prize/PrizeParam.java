@@ -14,8 +14,9 @@ public class PrizeParam {
     private String prizeDecoration;
     private String topImg;
     private String prizelistImg;
+    private String color;//背景颜色
     public PrizeParam(){}
-    public PrizeParam(Long id,String name,String username,Long actId,String begin,String end,String code,int prizeNum,int prizeMaxNum,String shareNum,String prizeDecoration,String topImg,String prizelistImg){
+    public PrizeParam(Long id,String name,String username,Long actId,String begin,String end,String code,int prizeNum,int prizeMaxNum,String shareNum,String prizeDecoration,String topImg,String prizelistImg,String color){
         this.id=id;
         this.name=name;
         this.username=username;
@@ -29,6 +30,7 @@ public class PrizeParam {
         this.prizeDecoration=prizeDecoration;
         this.topImg=topImg;
         this.prizelistImg=prizelistImg;
+        this.color=color;
     }
 
     public String getUsername() {
@@ -133,5 +135,13 @@ public class PrizeParam {
 
     public void setTopImg(String topImg) {
         this.topImg = topImg;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
