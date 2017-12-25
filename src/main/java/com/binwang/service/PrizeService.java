@@ -20,8 +20,8 @@ public interface PrizeService {
     List<PrizeListModel> list(int curPage, int pageSum, String name, String username, String begin, String end);
     int listSum(String name,String username, String begin, String end);
 //奖品数据列表
-    List<PrizeModel>getList(String type,String actName, int curPage, int pageSum);
-    int getListSum(String type,String actName);
+    List<PrizeModel>getList(String name,String type,String actName, int curPage, int pageSum);
+    int getListSum(String name,String type,String actName);
 
     Boolean changeNum(String actName, int num, int id,String name,String type,int ratio,String info,String duijiangTime,String duijiangLoc);
     Boolean paramDelete(int id);

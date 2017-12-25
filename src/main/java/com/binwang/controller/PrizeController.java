@@ -30,14 +30,15 @@ public class PrizeController {
 //奖品列表
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public Object list(@RequestParam("type") String type,
+    public Object list(@RequestParam("name") String name,
+                       @RequestParam("type") String type,
                        @RequestParam("actName") String actName,
                        @RequestParam("curPage") int curPage,
                        @RequestParam("pageSum") int pageSum) {
         try {
             Map<String, Object> m = new HashMap<>();
-            m.put("list", prizeService.getList(type,actName, curPage, pageSum));
-            int sum = prizeService.getListSum(type,actName);
+            m.put("list", prizeService.getList(name,type,actName, curPage, pageSum));
+            int sum = prizeService.getListSum(name,type,actName);
             m.put("sum", sum);
             return ResponseUtil.okJSON(m);
         } catch (Exception e) {
@@ -118,7 +119,7 @@ public class PrizeController {
     //抽奖设置编辑
     @RequestMapping(value = "/edit-prize-param", method = RequestMethod.POST)
     @ResponseBody
-    public Object PrizeParamEdit(PrizeParam prizeParam) {
+    public Object PrizeParamEdit( PrizeParam prizeParam) {
         try {
             Boolean res = prizeService.editPrizeParam(prizeParam);
             Map<String, Boolean> m = new HashMap<>();

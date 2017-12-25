@@ -12,8 +12,10 @@ public class PrizeParam {
     private String shareNum;
     private int prizeMaxNum;
     private String prizeDecoration;
+    private String topImg;
+    private String prizelistImg;
     public PrizeParam(){}
-    public PrizeParam(Long id,String name,String username,Long actId,String begin,String end,String code,int prizeNum,int prizeMaxNum,String shareNum,String prizeDecoration){
+    public PrizeParam(Long id,String name,String username,Long actId,String begin,String end,String code,int prizeNum,int prizeMaxNum,String shareNum,String prizeDecoration,String topImg,String prizelistImg){
         this.id=id;
         this.name=name;
         this.username=username;
@@ -25,6 +27,8 @@ public class PrizeParam {
         this.prizeMaxNum=prizeMaxNum;
         this.shareNum=shareNum;
         this.prizeDecoration=prizeDecoration;
+        this.topImg=topImg;
+        this.prizelistImg=prizelistImg;
     }
 
     public String getUsername() {
@@ -113,5 +117,21 @@ public class PrizeParam {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getPrizelistImg() {
+        return prizelistImg;
+    }
+
+    public void setPrizelistImg(String prizelistImg) {
+        this.prizelistImg = prizelistImg;
+    }
+
+    public String getTopImg() {
+        return topImg;
+    }
+
+    public void setTopImg(String topImg) {
+        this.topImg = topImg;
     }
 }

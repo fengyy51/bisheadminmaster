@@ -1,7 +1,7 @@
 package com.binwang.bean.activity;
 
 /**
- * Created by owen on 17/5/11.
+ * Created by yy on 17/5/11.
  */
 public class ActResource {
     private Long id;

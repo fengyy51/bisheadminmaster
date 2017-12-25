@@ -80,13 +80,13 @@ public class PrizeServiceImpl implements PrizeService {
     }
     @Override
     @Transactional
-    public List<PrizeModel>getList(String type,String actName, int curPage, int pageSum){
-        return prizeDao.getList(type,actName,(curPage - 1) * pageSum, pageSum);
+    public List<PrizeModel>getList(String name,String type,String actName, int curPage, int pageSum){
+        return prizeDao.getList(name,type,actName,(curPage - 1) * pageSum, pageSum);
     }
     @Override
     @Transactional
-    public int getListSum(String type,String actName){
-        return prizeDao.getListSum(type,actName);
+    public int getListSum(String name,String type,String actName){
+        return prizeDao.getListSum(name,type,actName);
     }
 
     @Override
