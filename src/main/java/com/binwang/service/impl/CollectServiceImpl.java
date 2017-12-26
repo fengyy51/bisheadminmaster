@@ -113,20 +113,10 @@ public class CollectServiceImpl implements CollectService {
     @Override
     @Transactional
     public Boolean addVoteParam(VoteParam voteParam) throws RuntimeException {
-        if (voteParam.getActId() <= 0)
-            throw new RuntimeException("参数不合法");
-        if (collectDao.getNum(voteParam.getActId()) > 0) {
-            if (collectDao.updateVoteParam(voteParam) > 0) {
-                return true;
-            } else {
-                throw new RuntimeException("更新投票设置失败，actid为" + voteParam.getActId());
-            }
+        if (collectDao.addVoteParam(voteParam) > 0) {
+            return true;
         } else {
-            if (collectDao.addVoteParam(voteParam) > 0) {
-                return true;
-            } else {
-                throw new RuntimeException("插入投票设置失败，actid为" + voteParam.getActId());
-            }
+            throw new RuntimeException("插入投票设置失败，actid为" + voteParam.getActId());
         }
     }
     @Override
@@ -148,6 +138,33 @@ public class CollectServiceImpl implements CollectService {
             return collectDao.listVoteSum(actName,username ,begin, end);
         } catch (Exception e) {
             throw new UserException("获取投票活动列表数量失败!");
+        }
+    }
+    @Override
+    @Transactional
+    public VoteParam VoteParamGet(long id){
+        try {
+            return collectDao.VoteParamGet(id);
+        } catch (Exception e) {
+            throw new UserException("获取投票活动设置失败!");
+        }
+    }
+    @Override
+    @Transactional
+    public  Boolean VoteParamEdit(VoteParam voteParam){
+        if (collectDao.updateVoteParam(voteParam) > 0) {
+            return true;
+        } else {
+            throw new RuntimeException("更新投票设置失败，actid为" + voteParam.getActId());
+        }
+    }
+    @Override
+    @Transactional
+    public Boolean PrizeParamDelete(int id){
+        if(collectDao.PrizeParamDelete(id)>0){
+            return true;
+        }else{
+            return false;
         }
     }
 

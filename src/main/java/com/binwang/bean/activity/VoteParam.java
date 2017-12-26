@@ -3,6 +3,7 @@ package com.binwang.bean.activity;
 public class VoteParam
 {
     private Long id;
+    private String username;
     private String actName;
     private Long actId;
     private String begin;
@@ -14,8 +15,9 @@ public class VoteParam
     private String voteDecoration;
     private int proApproved;
     public VoteParam(){}
-    public VoteParam(Long id,String actName,Long actId,String begin,String end,int proNum,int voteNum,int voteMaxNum,String shareNum,String voteDecoration,int proApproved){
+    public VoteParam(Long id,String username,String actName,Long actId,String begin,String end,int proNum,int voteNum,int voteMaxNum,String shareNum,String voteDecoration,int proApproved){
         this.id=id;
+        this.username=username;
         this.actName=actName;
         this.actId=actId;
         this.begin=begin;
@@ -114,5 +116,13 @@ public class VoteParam
 
     public void setActName(String actName) {
         this.actName = actName;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

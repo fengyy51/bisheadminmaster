@@ -40,7 +40,7 @@ public interface ICollectDao {
     @Select("select count(id) from vote_params where act_id=#{actId}")
     int getNum(Long actId);
 
-    @Update("UPDATE vote_params SET act_name=#{actName},begin=#{begin},end=#{end},pro_num=#{proNum},vote_num=#{voteNum},share_num=#{shareNum},vote_max_num=#{voteMaxNum},vote_decoration=#{voteDecoration},pro_approved=#{proApproved} WHERE act_id=#{actId}")
+    @Update("UPDATE vote_params SET act_name=#{actName},begin=#{begin},end=#{end},pro_num=#{proNum},vote_num=#{voteNum},share_num=#{shareNum},vote_max_num=#{voteMaxNum},vote_decoration=#{voteDecoration} WHERE id = #{id}")
     int updateVoteParam(VoteParam voteParam);
     //投票活动列表
 
@@ -49,4 +49,9 @@ public interface ICollectDao {
 
     int listVoteSum(@Param("actName") String actName,@Param("username")String username, @Param("begin") String begin, @Param("end") String end);
 
+    @Select("select act_name as actName,begin,end,pro_num as proNum,vote_num as voteNum,share_num as shareNum,vote_max_num as voteMaxNum,vote_decoration as voteDecoration from vote_params where id=#{id}")
+    VoteParam VoteParamGet(@Param("id")long id);
+
+    @Delete("delete from vote_params where id=#{id}")
+    int PrizeParamDelete(int id);
 }

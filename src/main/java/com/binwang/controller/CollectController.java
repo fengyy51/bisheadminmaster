@@ -80,20 +80,7 @@ public class CollectController {
             return ResponseUtil.errorJSON("更新审核状态出错");
         }
     }
-//投票设置
-    @RequestMapping(value = "/post-vote", method = RequestMethod.POST)
-    @ResponseBody
-    public Object VoteParamPost(VoteParam voteParam) {
-        try {
-            Boolean res = collectService.addVoteParam(voteParam);
-            Map<String, Boolean> m = new HashMap<>();
-            m.put("result", res);
-            return ResponseUtil.okJSON(m);
-        } catch (Exception e) {
-            System.out.print(e);
-            return ResponseUtil.errorJSON("出错,确保序号存在");
-        }
-    }
+
 
     @RequestMapping(value = "/post-first-img", method = RequestMethod.POST)
     @ResponseBody
@@ -141,6 +128,58 @@ public class CollectController {
             m.put("list", res);
             m.put("sum", sum);
             return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseUtil.errorJSON(e.getMessage());
+        }
+    }
+    //投票设置发起
+    @RequestMapping(value = "/post-vote", method = RequestMethod.POST)
+    @ResponseBody
+    public Object VoteParamPost(VoteParam voteParam) {
+        try {
+            Boolean res = collectService.addVoteParam(voteParam);
+            Map<String, Boolean> m = new HashMap<>();
+            m.put("result", res);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            System.out.print(e);
+            return ResponseUtil.errorJSON("出错,确保序号存在");
+        }
+    }
+    //投票设置获取
+    @RequestMapping(value = "/vote-param-get", method = RequestMethod.GET)
+    @ResponseBody
+    public Object voteParamGet(@RequestParam(value = "id") long id  ) {
+        try {
+            VoteParam res = collectService.VoteParamGet(id);
+            return ResponseUtil.okJSON(res);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseUtil.errorJSON(e.getMessage());
+        }
+    }
+    //投票设置编辑
+    @RequestMapping(value = "/vote-param-edit", method = RequestMethod.POST)
+    @ResponseBody
+    public Object VoteParamEdit(VoteParam voteParam) {
+        try {
+            Boolean res = collectService.VoteParamEdit(voteParam);
+            Map<String, Boolean> m = new HashMap<>();
+            m.put("result", res);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            System.out.print(e);
+            return ResponseUtil.errorJSON("修改投票设置出错");
+        }
+    }
+    //投票设置删除
+    @RequestMapping(value = "/vote-param-delete", method = RequestMethod.POST)
+    @ResponseBody
+    public Object PrizeParamDelete(@RequestParam(value = "id") int id) {
+        try {
+            Boolean res = collectService.PrizeParamDelete(id);
+            return ResponseUtil.okJSON(res);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());
             return ResponseUtil.errorJSON(e.getMessage());

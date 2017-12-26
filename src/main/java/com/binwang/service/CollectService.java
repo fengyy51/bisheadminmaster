@@ -24,10 +24,16 @@ public interface CollectService {
     Boolean firstImgUpdate(long id,String url);
 
     Boolean detailImgUpdate(long id, String urls);
-//    增加投票设置
-    Boolean addVoteParam(VoteParam voteParam);
+
     //投票列表
     List<VoteListModel>listVote(int curPage, int pageSum, String actName, String username, String begin, String end);
     int listVoteSum(String actName,String username, String begin, String end);
-
+    // 增加投票设置
+    Boolean addVoteParam(VoteParam voteParam);
+    //投票设置获取
+    VoteParam VoteParamGet(long id);
+    //投票设置编辑
+    Boolean VoteParamEdit(VoteParam voteParam);
+    //投票设置删除
+    Boolean PrizeParamDelete(int id);
 }
