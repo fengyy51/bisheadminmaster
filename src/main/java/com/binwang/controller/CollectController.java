@@ -4,7 +4,7 @@ import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
 import com.binwang.bean.collect.VoteListModel;
-import com.binwang.bean.collect.VoteUserModel;
+import com.binwang.bean.collect.VoteResultModel;
 import com.binwang.service.CollectService;
 import com.binwang.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -185,26 +185,39 @@ public class CollectController {
             return ResponseUtil.errorJSON(e.getMessage());
         }
     }
-    //投票用户列表获取
-//    @RequestMapping(value = "/list-vote-user", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Object VoteUserlist(
-//            @RequestParam(value = "curPage") int curPage,
-//            @RequestParam(value = "pageSum") int pageSum,
-//            @RequestParam(value = "actId") long actId,
-//            @RequestParam(value = "isUse") int isUse,
-//            @RequestParam(value = "code", required = false, defaultValue = "") String code) {
-//        try {
-//            List<VoteUserModel> res = collectService.userList(curPage, pageSum, actId, code, isUse);
-//            int sum = collectService.userListSum(actId, code, isUse);
-//            HashMap<String, Object> m = new HashMap<>();
-//            m.put("list", res);
-//            m.put("sum", sum);
-//            return ResponseUtil.okJSON(m);
-//        } catch (Exception e) {
-//            LOGGER.error(e.getMessage());
-//            return ResponseUtil.errorJSON(e.getMessage());
-//        }
-//    }
+    //投票结果获取
+    @RequestMapping(value = "/vote-result", method = RequestMethod.GET)
+    @ResponseBody
+    public Object VoteResult(
+            @RequestParam(value = "curPage") int curPage,
+            @RequestParam(value = "pageSum") int pageSum,
+            @RequestParam(value = "itemId") long itemId,
+            @RequestParam(value = "actId") long actId) {
+        try {
+            List<VoteResultModel> res = collectService.voteResult(curPage, pageSum,itemId,actId);
+            int sum = collectService.voteResultSum(itemId,actId);
+            HashMap<String, Object> m = new HashMap<>();
+            m.put("list", res);
+            m.put("sum", sum);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseUtil.errorJSON(e.getMessage());
+        }
+    }
+    //投票结果编辑
+    @RequestMapping(value = "/vote-result-edit", method = RequestMethod.POST)
+    @ResponseBody
+    public Object VoteResultEdit(VoteResultModel voteResultModel) {
+        try {
+            Boolean res = collectService.VoteResultEdit(voteResultModel);
+            Map<String, Boolean> m = new HashMap<>();
+            m.put("result", res);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            System.out.print(e);
+            return ResponseUtil.errorJSON("修改投票结果出错");
+        }
+    }
 
 }

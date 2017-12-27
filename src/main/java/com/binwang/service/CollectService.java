@@ -4,6 +4,7 @@ import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
 import com.binwang.bean.collect.VoteListModel;
+import com.binwang.bean.collect.VoteResultModel;
 
 import java.util.List;
 
@@ -36,4 +37,9 @@ public interface CollectService {
     Boolean VoteParamEdit(VoteParam voteParam);
     //投票设置删除
     Boolean PrizeParamDelete(int id);
+    //投票结果获取
+    List<VoteResultModel> voteResult(int curPage,int pageSum,long itemId,long actId);
+    int voteResultSum(long itemId,long actId);
+    //投票结果数编辑
+    Boolean VoteResultEdit(VoteResultModel voteResultModel);
 }

@@ -4,6 +4,7 @@ import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
 import com.binwang.bean.collect.VoteListModel;
+import com.binwang.bean.collect.VoteResultModel;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -54,4 +55,11 @@ public interface ICollectDao {
 
     @Delete("delete from vote_params where id=#{id}")
     int PrizeParamDelete(int id);
+
+    List<VoteResultModel> voteResult(@Param("itemId") long itemId,@Param("actId")long actId ,@Param("start") int start, @Param("pageSum") int pageSum);
+
+    int voteResultSum(@Param("itemId") long itemId,@Param("actId")long actId );
+
+    @Update("update f_vote set vote_num=#{voteNum} where id=#{id}")
+    int voteResultEdit(VoteResultModel voteResultModel);
 }

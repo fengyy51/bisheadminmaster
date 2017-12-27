@@ -4,6 +4,7 @@ import com.binwang.bean.activity.VoteParam;
 import com.binwang.bean.collect.CDetailModel;
 import com.binwang.bean.collect.CListModel;
 import com.binwang.bean.collect.VoteListModel;
+import com.binwang.bean.collect.VoteResultModel;
 import com.binwang.dao.ICollectDao;
 import com.binwang.exception.UserException;
 import com.binwang.service.CollectService;
@@ -167,5 +168,36 @@ public class CollectServiceImpl implements CollectService {
             return false;
         }
     }
-
+    //投票结果获取
+    @Override
+    @Transactional
+    public List<VoteResultModel> voteResult(int curPage, int pageSum, long itemId,long actId){
+        try {
+            List<VoteResultModel> res = collectDao.voteResult(itemId,actId, (curPage - 1) * pageSum, pageSum);
+            return res;
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new UserException("获取投票结果失败！");
+        }
+    }
+    @Override
+    @Transactional
+    public int voteResultSum(long itemId,long actId){
+        try {
+            return collectDao.voteResultSum(itemId,actId);
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new UserException("获取投票活动列表数量失败!");
+        }
+    }
+    //投票结果数编辑
+    @Override
+    @Transactional
+    public Boolean VoteResultEdit(VoteResultModel voteResultModel){
+        if (collectDao.voteResultEdit(voteResultModel) > 0) {
+            return true;
+        } else {
+            throw new RuntimeException("更新投票结果数失败，actid为" + voteResultModel.getId());
+        }
+    }
 }
