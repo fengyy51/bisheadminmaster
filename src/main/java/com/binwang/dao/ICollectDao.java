@@ -62,4 +62,6 @@ public interface ICollectDao {
 
     @Update("update f_vote set vote_num=#{voteNum} where id=#{id}")
     int voteResultEdit(VoteResultModel voteResultModel);
+    @Select("select distinct act_name from vote_params where username=#{username} ")
+    List<String>getActName(@Param("username")String username);
 }

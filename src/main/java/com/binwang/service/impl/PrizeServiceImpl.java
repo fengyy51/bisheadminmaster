@@ -119,8 +119,8 @@ public class PrizeServiceImpl implements PrizeService {
     }
     @Override
     @Transactional
-    public List<String> getActName(){
-        return prizeDao.getActName();
+    public List<String> getActName(String username){
+        return prizeDao.getActName(username);
     }
     @Override
     @Transactional

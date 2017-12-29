@@ -48,10 +48,10 @@ public class PrizeController {
     //抽奖奖项，关联活动获取
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ResponseBody
-    public Object Search() {
+    public Object Search(@RequestParam("username")String username) {
         try {
             Map<String, Object> m = new HashMap<>();
-            m.put("actName", prizeService.getActName());
+            m.put("actName", prizeService.getActName(username));
             m.put("type", prizeService.getType());
             return ResponseUtil.okJSON(m);
         } catch (Exception e) {

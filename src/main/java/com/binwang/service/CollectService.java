@@ -42,4 +42,6 @@ public interface CollectService {
     int voteResultSum(long itemId,long actId);
     //投票结果数编辑
     Boolean VoteResultEdit(VoteResultModel voteResultModel);
+    //获取投票活动名称
+    List<String> getActName(String username);
 }

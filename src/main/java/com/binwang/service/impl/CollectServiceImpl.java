@@ -200,4 +200,14 @@ public class CollectServiceImpl implements CollectService {
             throw new RuntimeException("更新投票结果数失败，actid为" + voteResultModel.getId());
         }
     }
+    @Override
+    @Transactional
+    public List<String> getActName(String username){
+        try {
+            return collectDao.getActName(username);
+        }catch (Exception e){
+            System.out.println(e);
+            throw new UserException("获取投票活动名称失败");
+        }
+    }
 }

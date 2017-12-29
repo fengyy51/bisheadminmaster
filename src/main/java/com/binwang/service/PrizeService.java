@@ -25,7 +25,7 @@ public interface PrizeService {
 
     Boolean changeNum(String actName, int num, int id,String name,String type,int ratio,String info,String duijiangTime,String duijiangLoc);
     Boolean paramDelete(int id);
-    List<String> getActName();
+    List<String> getActName(String username);
     List<String> getType();
     //抽奖配置
     Boolean addPrizeParam(PrizeParam prizeParam);

@@ -34,8 +34,8 @@ public interface IPrizeDao {
     List<PrizeModel>getList(@Param("name")String name,@Param("type")String type,@Param("actName")String actName, @Param("start") int start, @Param("pageSum") int pageSum);
 
     int getListSum(@Param("name")String name,@Param("type")String type,@Param("actName")String actName);
-    @Select("select distinct name from prize_params ")
-    List<String>getActName();
+    @Select("select distinct name from prize_params where user_name=#{username}")
+    List<String>getActName(@Param("username")String username);
 
     List<PrizeListModel> listPrize(@Param("name") String name, @Param("username")String username, @Param("begin") String begin, @Param("end") String end,
                                  @Param("start") int start, @Param("pageSum") int pageSum);

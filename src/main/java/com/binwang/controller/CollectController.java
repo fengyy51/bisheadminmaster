@@ -219,5 +219,37 @@ public class CollectController {
             return ResponseUtil.errorJSON("修改投票结果出错");
         }
     }
+    //刷票行为分析开始
+
+    //获取投票活动名称
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    @ResponseBody
+    public Object Search(@RequestParam("username")String username) {
+        try {
+            Map<String, Object> m = new HashMap<>();
+            m.put("actName", collectService.getActName(username));
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            return ResponseUtil.errorJSON("出错");
+        }
+    }
+    //获取异常数据列表
+    @RequestMapping(value = "/brush-list", method = RequestMethod.GET)
+    @ResponseBody
+    public Object Brushlist(@RequestParam("actName")String actName,
+                            @RequestParam("interval")String interval,
+                            @RequestParam("num")String num,
+                            @RequestParam("curPage")int curPage,
+                            @RequestParam("pageSum")int pageSum) {
+        try {
+            Map<String, Object> m = new HashMap<>();
+            List<>list=collectService.getBrushlist(actName,interval,num,curPage,pageSum));
+            m.put("list",list);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            return ResponseUtil.errorJSON("获取异常数据列表出错");
+        }
+    }
+
 
 }
