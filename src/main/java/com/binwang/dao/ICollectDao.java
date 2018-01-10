@@ -1,10 +1,7 @@
 package com.binwang.dao;
 
 import com.binwang.bean.activity.VoteParam;
-import com.binwang.bean.collect.CDetailModel;
-import com.binwang.bean.collect.CListModel;
-import com.binwang.bean.collect.VoteListModel;
-import com.binwang.bean.collect.VoteResultModel;
+import com.binwang.bean.collect.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -64,7 +61,8 @@ public interface ICollectDao {
     int voteResultEdit(VoteResultModel voteResultModel);
     @Select("select distinct act_name from vote_params where username=#{username} ")
     List<String>getActName(@Param("username")String username);
-    List<VoteResultModel> getBrushlist(@Param("id")int id,@Param("actName") String actName,@Param("begin")String begin,@Param("end")String end,@Param("num") int num);
+    List<VoteBrushModel> getBrushlist(@Param("id")int id, @Param("actName") String actName, @Param("begin")String begin, @Param("end")String end, @Param("num") int num);
     int getBrushlistSum(@Param("id")int id,@Param("actName") String actName,@Param("begin")String begin,@Param("end")String end,@Param("num") int num);
     List<Integer>getRecordIDS(@Param("actName")String actName);
+
 }

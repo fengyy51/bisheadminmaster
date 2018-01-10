@@ -1,10 +1,7 @@
 package com.binwang.controller;
 
 import com.binwang.bean.activity.VoteParam;
-import com.binwang.bean.collect.CDetailModel;
-import com.binwang.bean.collect.CListModel;
-import com.binwang.bean.collect.VoteListModel;
-import com.binwang.bean.collect.VoteResultModel;
+import com.binwang.bean.collect.*;
 import com.binwang.service.CollectService;
 import com.binwang.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -246,7 +243,7 @@ public class CollectController {
                             @RequestParam("pageSum")int pageSum) {
         try {
             Map<String, Object> m = new HashMap<>();
-            List<VoteResultModel>list=new ArrayList<>();
+            List<VoteBrushModel>list=new ArrayList<>();
             int sum=0;
             if(id==-1){
                 List<Integer>ids=collectService.getRecordIDS(actName);
@@ -263,7 +260,7 @@ public class CollectController {
                 if((sum-startIndex)<pageSum){
                     lastIndex=sum;
                 }
-                List<VoteResultModel>res=new ArrayList<>();
+                List<VoteBrushModel>res=new ArrayList<>();
                 if(list.size()!=0){
                     res= list.subList(startIndex,lastIndex);
                 }
@@ -274,7 +271,74 @@ public class CollectController {
                     sum+=signum;
                     list=collectService.getBrushlist(id,actName,begin,end,num);
                 }
-                List<VoteResultModel>res=new ArrayList<>();
+                List<VoteBrushModel>res=new ArrayList<>();
+                if(list.size()!=0){
+                    int startIndex=(curPage-1)*pageSum;
+                    int lastIndex=curPage*pageSum;
+                    if((sum-startIndex)<pageSum){
+                        lastIndex=sum;
+                    }
+                    res=list.subList(startIndex,lastIndex);
+                }
+                m.put("list",res);
+            }
+            m.put("sum", sum);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            return ResponseUtil.errorJSON("获取异常数据列表出错");
+        }
+    }
+    //获取异常数据个数
+    @RequestMapping(value = "/brush-list-num", method = RequestMethod.GET)
+    @ResponseBody
+    public Object BrushlistNum(@RequestParam("id")int id,
+                            @RequestParam("actName")String actName,
+                            @RequestParam("begin")String begin,
+                            @RequestParam("end")String end,
+                            @RequestParam("num")int num,
+                            @RequestParam("curPage")int curPage,
+                            @RequestParam("pageSum")int pageSum) {
+        try {
+            Map<String, Object> m = new HashMap<>();
+            List<Map<String,Integer>>list=new ArrayList<>();
+            int sum=0;
+            if(id==-1){
+                List<Integer>ids=collectService.getRecordIDS(actName);
+                for (int i = 0; i < ids.size(); i++) {
+                    id = ids.get(i);
+                    System.out.println(id);
+                    int signum=collectService.getBrushlistSum(id,actName,begin,end,num);
+                    if(signum>num){
+                        ++sum;
+
+                        Map<String,Integer> n=new HashMap<>();
+                        n.put("id",id);
+                        n.put("num",signum);
+                        System.out.println(n);
+                        list.add(n);
+                    }
+                }
+                int startIndex=(curPage-1)*pageSum;
+                int lastIndex=curPage*pageSum;
+                if((sum-startIndex)<pageSum){
+                    lastIndex=sum;
+                }
+                System.out.println(list);
+                List<Map<String,Integer>>res=new ArrayList<>();
+                if(list.size()!=0){
+                    res= list.subList(startIndex,lastIndex);
+                }
+                m.put("list",res);
+            }else{
+                int signum=collectService.getBrushlistSum(id,actName,begin,end,num);
+                if(signum>num){
+                    ++sum;
+                    Map<String,Integer> n=new HashMap<>();
+                    n.put("id",id);
+                    n.put("num",signum);
+                    list.add(n);
+                }
+                List<Map<String,Integer>>res=new ArrayList<>();
                 if(list.size()!=0){
                     int startIndex=(curPage-1)*pageSum;
                     int lastIndex=curPage*pageSum;

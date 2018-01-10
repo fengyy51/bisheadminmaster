@@ -1,10 +1,7 @@
 package com.binwang.service.impl;
 
 import com.binwang.bean.activity.VoteParam;
-import com.binwang.bean.collect.CDetailModel;
-import com.binwang.bean.collect.CListModel;
-import com.binwang.bean.collect.VoteListModel;
-import com.binwang.bean.collect.VoteResultModel;
+import com.binwang.bean.collect.*;
 import com.binwang.dao.ICollectDao;
 import com.binwang.exception.UserException;
 import com.binwang.service.CollectService;
@@ -214,7 +211,7 @@ public class CollectServiceImpl implements CollectService {
     //刷票记录查询
     @Override
     @Transactional
-    public List<VoteResultModel> getBrushlist(int id,String actName,String begin,String end,int num){
+    public List<VoteBrushModel> getBrushlist(int id, String actName, String begin, String end, int num){
         try{
             return collectDao.getBrushlist(id,actName,begin,end,num);
         }catch (Exception e){
