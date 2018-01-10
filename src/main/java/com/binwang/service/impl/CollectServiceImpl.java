@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -210,4 +211,36 @@ public class CollectServiceImpl implements CollectService {
             throw new UserException("获取投票活动名称失败");
         }
     }
+    //刷票记录查询
+    @Override
+    @Transactional
+    public List<VoteResultModel> getBrushlist(int id,String actName,String begin,String end,int num){
+        try{
+            return collectDao.getBrushlist(id,actName,begin,end,num);
+        }catch (Exception e){
+            System.out.println(e);
+            throw new UserException("获取刷票记录失败");
+        }
+    }
+    @Override
+    @Transactional
+    public int getBrushlistSum(int id,String actName,String begin,String end,int num){
+        try{
+            return collectDao.getBrushlistSum(id,actName,begin,end,num);
+        }catch (Exception e){
+            System.out.println(e);
+            throw new UserException("获取刷票记录数失败");
+        }
+    }
+    @Override
+    @Transactional
+    public List<Integer> getRecordIDS(String actName) {
+        try{
+            return collectDao.getRecordIDS(actName);
+        }catch (Exception e){
+            System.out.println(e);
+            throw new UserException("获取id数失败");
+        }
+    }
+
 }

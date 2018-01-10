@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -236,15 +237,55 @@ public class CollectController {
     //获取异常数据列表
     @RequestMapping(value = "/brush-list", method = RequestMethod.GET)
     @ResponseBody
-    public Object Brushlist(@RequestParam("actName")String actName,
-                            @RequestParam("interval")String interval,
-                            @RequestParam("num")String num,
+    public Object Brushlist(@RequestParam("id")int id,
+                            @RequestParam("actName")String actName,
+                            @RequestParam("begin")String begin,
+                            @RequestParam("end")String end,
+                            @RequestParam("num")int num,
                             @RequestParam("curPage")int curPage,
                             @RequestParam("pageSum")int pageSum) {
         try {
             Map<String, Object> m = new HashMap<>();
-            List<>list=collectService.getBrushlist(actName,interval,num,curPage,pageSum));
-            m.put("list",list);
+            List<VoteResultModel>list=new ArrayList<>();
+            int sum=0;
+            if(id==-1){
+                List<Integer>ids=collectService.getRecordIDS(actName);
+                for (int i = 0; i < ids.size(); i++) {
+                    id = ids.get(i);
+                    int signum=collectService.getBrushlistSum(id,actName,begin,end,num);
+                    if(signum>num){
+                        sum+=signum;
+                        list.addAll(collectService.getBrushlist(id,actName,begin,end,num));
+                    }
+                }
+                int startIndex=(curPage-1)*pageSum;
+                int lastIndex=curPage*pageSum;
+                if((sum-startIndex)<pageSum){
+                    lastIndex=sum;
+                }
+                List<VoteResultModel>res=new ArrayList<>();
+                if(list.size()!=0){
+                    res= list.subList(startIndex,lastIndex);
+                }
+                m.put("list",res);
+            }else{
+                int signum=collectService.getBrushlistSum(id,actName,begin,end,num);
+                if(signum>num){
+                    sum+=signum;
+                    list=collectService.getBrushlist(id,actName,begin,end,num);
+                }
+                List<VoteResultModel>res=new ArrayList<>();
+                if(list.size()!=0){
+                    int startIndex=(curPage-1)*pageSum;
+                    int lastIndex=curPage*pageSum;
+                    if((sum-startIndex)<pageSum){
+                        lastIndex=sum;
+                    }
+                    res=list.subList(startIndex,lastIndex);
+                }
+                m.put("list",res);
+            }
+            m.put("sum", sum);
             return ResponseUtil.okJSON(m);
         } catch (Exception e) {
             return ResponseUtil.errorJSON("获取异常数据列表出错");

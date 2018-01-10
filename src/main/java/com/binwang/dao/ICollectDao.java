@@ -64,4 +64,7 @@ public interface ICollectDao {
     int voteResultEdit(VoteResultModel voteResultModel);
     @Select("select distinct act_name from vote_params where username=#{username} ")
     List<String>getActName(@Param("username")String username);
+    List<VoteResultModel> getBrushlist(@Param("id")int id,@Param("actName") String actName,@Param("begin")String begin,@Param("end")String end,@Param("num") int num);
+    int getBrushlistSum(@Param("id")int id,@Param("actName") String actName,@Param("begin")String begin,@Param("end")String end,@Param("num") int num);
+    List<Integer>getRecordIDS(@Param("actName")String actName);
 }

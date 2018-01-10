@@ -44,4 +44,8 @@ public interface CollectService {
     Boolean VoteResultEdit(VoteResultModel voteResultModel);
     //获取投票活动名称
     List<String> getActName(String username);
+    //刷票记录查询
+    List<VoteResultModel> getBrushlist(int id,String actName,String begin,String end,int num);
+    int getBrushlistSum(int id,String actName,String begin,String end,int num);
+    List<Integer> getRecordIDS(String actName);
 }
