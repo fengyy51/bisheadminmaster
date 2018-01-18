@@ -234,7 +234,7 @@ public class CollectController {
     //获取异常数据列表
     @RequestMapping(value = "/brush-list", method = RequestMethod.GET)
     @ResponseBody
-    public Object Brushlist(@RequestParam("id")int id,
+    public Object BrushList(@RequestParam("id")int id,
                             @RequestParam("actName")String actName,
                             @RequestParam("begin")String begin,
                             @RequestParam("end")String end,
@@ -291,7 +291,7 @@ public class CollectController {
     //获取异常数据个数
     @RequestMapping(value = "/brush-list-num", method = RequestMethod.GET)
     @ResponseBody
-    public Object BrushlistNum(@RequestParam("id")int id,
+    public Object BrushListNum(@RequestParam("id")int id,
                             @RequestParam("actName")String actName,
                             @RequestParam("begin")String begin,
                             @RequestParam("end")String end,
@@ -341,9 +341,11 @@ public class CollectController {
                 List<Map<String,Integer>>res=new ArrayList<>();
                 if(list.size()!=0){
                     int startIndex=(curPage-1)*pageSum;
-                    int lastIndex=curPage*pageSum;
+                    int lastIndex;
                     if((sum-startIndex)<pageSum){
                         lastIndex=sum;
+                    }else{
+                        lastIndex=curPage*pageSum;
                     }
                     res=list.subList(startIndex,lastIndex);
                 }
@@ -355,6 +357,5 @@ public class CollectController {
             return ResponseUtil.errorJSON("获取异常数据列表出错");
         }
     }
-
 
 }
