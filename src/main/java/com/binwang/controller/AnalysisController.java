@@ -1,5 +1,6 @@
 package com.binwang.controller;
 
+import com.binwang.bean.analysis.UserCollect;
 import com.binwang.bean.analysis.Userprize;
 import com.binwang.service.AnalysisService;
 import com.binwang.util.ResponseUtil;
@@ -27,6 +28,18 @@ public class AnalysisController {
     public Object UserPrize(){
         try {
             List<Userprize> list = analysisService.listUserPrize();
+            return ResponseUtil.okJSON(list);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseUtil.errorJSON(e.getMessage());
+        }
+    }
+    @CrossOrigin(origins = "http://localhost:8080")
+    @RequestMapping(value = "/user-collect", method = RequestMethod.GET)
+    @ResponseBody
+    public Object UserCollect(){
+        try {
+            List<UserCollect> list = analysisService.listUserCollect();
             return ResponseUtil.okJSON(list);
         } catch (Exception e) {
             LOGGER.error(e.getMessage());

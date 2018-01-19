@@ -1,6 +1,7 @@
 package com.binwang.service.impl;
 
 
+import com.binwang.bean.analysis.UserCollect;
 import com.binwang.bean.analysis.Userprize;
 import com.binwang.dao.AnalysisDao;
 import com.binwang.exception.UserException;
@@ -24,6 +25,16 @@ public class AnalysisServiceImpl implements AnalysisService {
     public List<Userprize>listUserPrize(){
         try {
             List<Userprize> res = analysisDao.listUserPrize();
+            return res;
+        } catch (Exception e) {
+            throw new UserException("获取用户抽奖记录失败！");
+        }
+    }
+    @Override
+    @Transactional
+    public List<UserCollect>listUserCollect(){
+        try {
+            List<UserCollect> res = analysisDao.listUserCollect();
             return res;
         } catch (Exception e) {
             throw new UserException("获取用户抽奖记录失败！");
