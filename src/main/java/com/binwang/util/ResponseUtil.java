@@ -28,6 +28,14 @@ public class ResponseUtil {
         returnMap.put("data", object);
         return returnMap;
     }
+    public static Object okBoolean(boolean bool) {
+        HashMap<String, Object> returnMap = new HashMap<>();
+        HashMap<String, Boolean> m = new HashMap<>();
+        m.put("result", bool);
+        returnMap.put("code", 200);
+        returnMap.put("data", m);
+        return returnMap;
+    }
 
     public static void responseText(HttpServletResponse response, String json) {
         response.setCharacterEncoding("UTF-8");
