@@ -22,8 +22,8 @@ public class NoticeServiceImpl implements NoticeService {
     private INoticeDao noticeDao;
 
     @Override
-    public Boolean add(String content, String pubDate) {
-        NoticeDO notice = new NoticeDO(content, pubDate);
+    public Boolean add(String content, String pubDate,String username) {
+        NoticeDO notice = new NoticeDO(content, pubDate,username);
         if (noticeDao.add(notice) > 0)
             return true;
         else

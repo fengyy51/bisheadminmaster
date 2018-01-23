@@ -11,7 +11,7 @@ import java.util.List;
 public interface NoticeService {
 
     @Transactional
-    Boolean add(String content, String pubDate);
+    Boolean add(String content, String pubDate,String username);
 
     List<NoticeDO> list(int curPage, int pageSum,String username);
 

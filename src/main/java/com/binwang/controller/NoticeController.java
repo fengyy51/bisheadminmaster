@@ -32,8 +32,9 @@ public class NoticeController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Object add(@RequestParam(value = "content") String content,
-                      @RequestParam(value = "pubDate") String pubDate) {
-        Boolean res = noticeService.add(content, pubDate);
+                      @RequestParam(value = "pubDate") String pubDate,
+                      @RequestParam(value = "username")String username) {
+        Boolean res = noticeService.add(content, pubDate,username);
         if (res)
             return ResponseUtil.okJSON(res);
         else {

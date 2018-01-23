@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 @Mapper
 public interface INoticeDao {
-    @Insert("INSERT INTO notice (content, pub_date,add_time, mod_time) VALUES(#{content}, #{pubDate}, unix_timestamp(), unix_timestamp())")
+    @Insert("INSERT INTO notice (content, pub_date,username,add_time, mod_time) VALUES(#{content}, #{pubDate},#{username}, unix_timestamp(), unix_timestamp())")
     int add(NoticeDO notice);
 
     @Select("SELECT id,content,pub_date as pubDate from notice where username=#{username} order by pub_date desc limit #{start},#{pageSum}")
