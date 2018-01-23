@@ -77,6 +77,21 @@ public class LoginController {
             return ResponseUtil.errorJSON("登录失败，请重试");
         }
     }
+
+    @RequestMapping(value = "/update-pwd", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updatePwd(@RequestParam("username") String username,
+                        @RequestParam("password") String password) {
+        try {
+            int res = userDao.updatePwd(username,MD5Util.getMD5(password));
+            if (res > 0)
+                return ResponseUtil.okBoolean(true);
+            else
+                return ResponseUtil.okBoolean(false);
+        } catch (Exception e) {
+            return ResponseUtil.errorJSON("修改密码失败，请重试");
+        }
+    }
 //    @RequestMapping(value = "/login", method = RequestMethod.POST)
 //    @ResponseBody
 //    public Object login(@RequestParam(value = "userName") String userName,

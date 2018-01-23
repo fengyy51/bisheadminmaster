@@ -12,6 +12,9 @@ public interface UserDao {
     @Select("select count(id) from user where username = #{username} limit 1")
     int isUserName(@Param("username") String username);
 
+    @Update("update user set password=#{password} where username=#{username} ")
+    int updatePwd(@Param("username") String username, @Param("password") String password);
+
     @Select("select password from user where username = #{username}")
     String login(@Param("username") String username);
 
