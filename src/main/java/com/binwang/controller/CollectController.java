@@ -308,13 +308,14 @@ public class CollectController {
                     id = ids.get(i);
                     System.out.println(id);
                     int signum=collectService.getBrushlistSum(id,actName,begin,end,num);
+                    int voteId=collectService.getVoteId(actName);
                     if(signum>num){
                         ++sum;
-
                         Map<String,Integer> n=new HashMap<>();
                         n.put("id",id);
                         n.put("num",signum);
-                        System.out.println(n);
+                        n.put("voteId",voteId);
+//                        System.out.println(n);
                         list.add(n);
                     }
                 }

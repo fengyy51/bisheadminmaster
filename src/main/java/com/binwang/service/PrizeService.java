@@ -36,4 +36,6 @@ public interface PrizeService {
     List<PrizeUserModel> userList(int curPage, int pageSum, long actId, String code, int isUse);
     int userListSum(long actId, String code, int isUse);
 
+    Boolean doUse(long id);
+
 }

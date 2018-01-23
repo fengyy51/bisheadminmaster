@@ -45,4 +45,5 @@ public interface CollectService {
     List<VoteBrushModel> getBrushlist(int id, String actName, String begin, String end, int num);
     int getBrushlistSum(int id,String actName,String begin,String end,int num);
     List<Integer> getRecordIDS(String actName);
+    int getVoteId(String actName);
 }

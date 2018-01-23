@@ -64,5 +64,7 @@ public interface ICollectDao {
     List<VoteBrushModel> getBrushlist(@Param("id")int id, @Param("actName") String actName, @Param("begin")String begin, @Param("end")String end, @Param("num") int num);
     int getBrushlistSum(@Param("id")int id,@Param("actName") String actName,@Param("begin")String begin,@Param("end")String end,@Param("num") int num);
     List<Integer>getRecordIDS(@Param("actName")String actName);
+    @Select("select id from vote_params where act_name=#{actName}")
+    int getVoteId(@Param("actName") String actName);
 
 }

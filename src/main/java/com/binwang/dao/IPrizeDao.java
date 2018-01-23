@@ -64,4 +64,7 @@ public interface IPrizeDao {
                                  @Param("start") int start, @Param("pageSum") int pageSum);
 
     int userListSum(@Param("actId") long actId, @Param("code") String code, @Param("isUse") int isUse);
+
+    @Update("update f_user_prize set is_use= 1  where id=#{id}")
+    int doUse(@Param("id")long id);
 }

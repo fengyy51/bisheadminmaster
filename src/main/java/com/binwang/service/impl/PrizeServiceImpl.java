@@ -179,4 +179,17 @@ public class PrizeServiceImpl implements PrizeService {
             throw new UserException("获取抽奖用户列表数量失败!");
         }
     }
+    @Override
+    @Transactional
+    public Boolean doUse(long id){
+        try {
+            if(prizeDao.doUse(id)>0){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (Exception e) {
+            throw new UserException("验证使用失败!");
+        }
+    }
 }

@@ -239,5 +239,14 @@ public class CollectServiceImpl implements CollectService {
             throw new UserException("获取id数失败");
         }
     }
-
+    @Override
+    @Transactional
+    public int getVoteId(String actName){
+        try{
+            return collectDao.getVoteId(actName);
+        }catch (Exception e){
+            System.out.println(e);
+            throw new UserException("获取投票活动id失败");
+        }
+    }
 }

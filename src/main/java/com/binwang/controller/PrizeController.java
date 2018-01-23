@@ -188,5 +188,17 @@ public class PrizeController {
             return ResponseUtil.errorJSON(e.getMessage());
         }
     }
-
+    @RequestMapping(value = "/do-use", method = RequestMethod.POST)
+    @ResponseBody
+    public Object doUse(@RequestParam(value = "id") long id) {
+        try {
+            Boolean res = prizeService.doUse(id);
+            Map<String, Boolean> m = new HashMap<>();
+            m.put("result", res);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseUtil.errorJSON("签到失败");
+        }
+    }
 }
