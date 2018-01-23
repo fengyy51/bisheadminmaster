@@ -13,7 +13,7 @@ public interface NoticeService {
     @Transactional
     Boolean add(String content, String pubDate);
 
-    List<NoticeDO> list(int curPage, int pageSum);
+    List<NoticeDO> list(int curPage, int pageSum,String username);
 
     int numOfNotice();
 

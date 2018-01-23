@@ -45,8 +45,9 @@ public class NoticeController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public Object list(@RequestParam(value = "curPage") int curPage,
-                       @RequestParam(value = "pageSum") int pageSum) {
-        List<NoticeDO> res = noticeService.list(curPage, pageSum);
+                       @RequestParam(value = "pageSum") int pageSum,
+                       @RequestParam(value = "username")String username) {
+        List<NoticeDO> res = noticeService.list(curPage, pageSum,username);
         int sum = noticeService.numOfNotice();
         if (res != null && sum != -1) {
             Map<String, Object> m = new HashMap<>();

@@ -15,8 +15,8 @@ public interface INoticeDao {
     @Insert("INSERT INTO notice (content, pub_date,add_time, mod_time) VALUES(#{content}, #{pubDate}, unix_timestamp(), unix_timestamp())")
     int add(NoticeDO notice);
 
-    @Select("SELECT id,content,pub_date as pubDate from notice order by pub_date desc limit #{start},#{pageSum}")
-    List<NoticeDO> list(@Param(value = "start") int start, @Param(value = "pageSum") int pageSum);
+    @Select("SELECT id,content,pub_date as pubDate from notice where username=#{username} order by pub_date desc limit #{start},#{pageSum}")
+    List<NoticeDO> list(@Param(value = "start") int start, @Param(value = "pageSum") int pageSum,@Param(value = "username")String username);
 
     @Select("SELECT count(id) from notice")
     int numOfNotice();

@@ -31,9 +31,9 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public List<NoticeDO> list(int curPage, int pageSum) {
+    public List<NoticeDO> list(int curPage, int pageSum,String username) {
         try {
-            return noticeDao.list((curPage - 1) * pageSum, pageSum);
+            return noticeDao.list((curPage - 1) * pageSum, pageSum,username);
         } catch (Exception e) {
             return null;
         }
