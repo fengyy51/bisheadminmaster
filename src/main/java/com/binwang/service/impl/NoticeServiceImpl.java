@@ -40,9 +40,9 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public int numOfNotice() {
+    public int numOfNotice(String username) {
         try {
-            return noticeDao.numOfNotice();
+            return noticeDao.numOfNotice(username);
         } catch (Exception e) {
             return -1;
         }

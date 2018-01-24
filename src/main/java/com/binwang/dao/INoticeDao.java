@@ -18,8 +18,8 @@ public interface INoticeDao {
     @Select("SELECT id,content,pub_date as pubDate from notice where username=#{username} order by pub_date desc limit #{start},#{pageSum}")
     List<NoticeDO> list(@Param(value = "start") int start, @Param(value = "pageSum") int pageSum,@Param(value = "username")String username);
 
-    @Select("SELECT count(id) from notice")
-    int numOfNotice();
+    @Select("SELECT count(id) from notice where username=#{username}")
+    int numOfNotice(@Param(value = "username")String username);
 
     @Delete("DELETE FROM notice where id = #{id}")
     int delete(@Param(value = "id") Long id);

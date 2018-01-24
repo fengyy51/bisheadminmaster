@@ -49,7 +49,7 @@ public class NoticeController {
                        @RequestParam(value = "pageSum") int pageSum,
                        @RequestParam(value = "username")String username) {
         List<NoticeDO> res = noticeService.list(curPage, pageSum,username);
-        int sum = noticeService.numOfNotice();
+        int sum = noticeService.numOfNotice(username);
         if (res != null && sum != -1) {
             Map<String, Object> m = new HashMap<>();
             m.put("list", res);

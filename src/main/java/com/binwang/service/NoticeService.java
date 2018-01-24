@@ -15,7 +15,7 @@ public interface NoticeService {
 
     List<NoticeDO> list(int curPage, int pageSum,String username);
 
-    int numOfNotice();
+    int numOfNotice(String username);
 
     @Transactional
     Boolean delete(Long id);
