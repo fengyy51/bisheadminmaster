@@ -63,6 +63,9 @@ public interface IPrizeDao {
     List<PrizeUserModel> userList(@Param("actId") long actId, @Param("code") String code, @Param("isUse") int isUse,
                                  @Param("start") int start, @Param("pageSum") int pageSum);
 
+    //用户全部列表
+    List<PrizeUserModel> userListAll(@Param("actId") long actId, @Param("code") String code, @Param("isUse") int isUse);
+
     int userListSum(@Param("actId") long actId, @Param("code") String code, @Param("isUse") int isUse);
 
     @Update("update f_user_prize set is_use= 1  where id=#{id}")

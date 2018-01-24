@@ -27,7 +27,8 @@ public interface ActivityService {
     Boolean regitemdelete(long id,String username);
     /*签到报名管理*/
     List<SignListModel> signList(int curPage, int pageSum, long actId, String code, int sign);
-
+    //用户管理全部列表
+    List<SignListModel> signListAll(long actId, String code, int sign);
     int signListSum(long actId, String code, int sign);
 
     Boolean doSign(long actId,String openId);

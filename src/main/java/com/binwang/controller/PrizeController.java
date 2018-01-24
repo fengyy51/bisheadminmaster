@@ -188,6 +188,26 @@ public class PrizeController {
             return ResponseUtil.errorJSON(e.getMessage());
         }
     }
+    //抽奖用户列表全部获取
+    @RequestMapping(value = "/list-user-all", method = RequestMethod.GET)
+    @ResponseBody
+    public Object PrizeUserlistAll(
+            @RequestParam(value = "actId") long actId,
+            @RequestParam(value = "isUse") int isUse,
+            @RequestParam(value = "code", required = false, defaultValue = "") String code) {
+        try {
+//            System.out.println("actID"+actId);
+            List<PrizeUserModel> res = prizeService.userListAll( actId, code, isUse);
+            int sum = prizeService.userListSum(actId, code, isUse);
+            HashMap<String, Object> m = new HashMap<>();
+            m.put("list", res);
+            m.put("sum", sum);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseUtil.errorJSON(e.getMessage());
+        }
+    }
     @RequestMapping(value = "/do-use", method = RequestMethod.POST)
     @ResponseBody
     public Object doUse(@RequestParam(value = "id") long id) {

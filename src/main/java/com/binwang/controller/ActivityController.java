@@ -191,7 +191,25 @@ public class ActivityController {
             return ResponseUtil.errorJSON(e.getMessage());
         }
     }
-
+    //活动用户管理全部列表
+    @RequestMapping(value = "/sign/list-all")
+    @ResponseBody
+    public Object signList(
+            @RequestParam(value = "actId") long actId,
+            @RequestParam(value = "sign") int sign,
+            @RequestParam(value = "code", required = false, defaultValue = "") String code) {
+        try {
+            List<SignListModel> res = activityService.signListAll(actId, code, sign);
+            int sum = activityService.signListSum(actId, code, sign);
+            HashMap<String, Object> m = new HashMap<>();
+            m.put("list", res);
+            m.put("sum", sum);
+            return ResponseUtil.okJSON(m);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+            return ResponseUtil.errorJSON(e.getMessage());
+        }
+    }
     @RequestMapping(value = "/do-sign", method = RequestMethod.POST)
     @ResponseBody
     public Object doSign(@RequestParam(value = "openId") String openId,

@@ -170,6 +170,17 @@ public class PrizeServiceImpl implements PrizeService {
             throw new UserException("获取抽奖用户列表失败！");
         }
     }
+    //抽奖活动用户列表全部获取
+    @Override
+    @Transactional
+    public List<PrizeUserModel>  userListAll( long actId, String code, int isUse){
+        try {
+            List<PrizeUserModel> res = prizeDao.userListAll(actId, code, isUse);
+            return res;
+        } catch (Exception e) {
+            throw new UserException("获取抽奖用户全部列表失败！");
+        }
+    }
     @Override
     @Transactional
     public int userListSum(long actId, String code, int isUse){

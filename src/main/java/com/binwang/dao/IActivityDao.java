@@ -60,6 +60,7 @@ public interface IActivityDao {
 
     List<SignListModel> signList(@Param("actId") long actId, @Param("code") String code, @Param("sign") int sign,
                                  @Param("start") int start, @Param("pageSum") int pageSum);
+    List<SignListModel> signListAll(@Param("actId") long actId, @Param("code") String code, @Param("sign") int sign);
 
     int signListSum(@Param("actId") long actId, @Param("code") String code, @Param("sign") int sign);
 

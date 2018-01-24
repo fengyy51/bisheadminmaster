@@ -34,6 +34,7 @@ public interface PrizeService {
     Boolean deletePrizeParam(int id);
     //抽奖活动用户列表获取
     List<PrizeUserModel> userList(int curPage, int pageSum, long actId, String code, int isUse);
+    List<PrizeUserModel> userListAll(long actId, String code, int isUse);
     int userListSum(long actId, String code, int isUse);
 
     Boolean doUse(long id);

@@ -202,6 +202,15 @@ public class ActivityServiceImpl implements ActivityService {
             throw new UserException("获取签到列表失败！");
         }
     }
+    @Override
+    public List<SignListModel> signListAll(long actId, String code, int sign) {
+        try {
+            List<SignListModel> res = iActivityDao.signListAll(actId, code, sign);
+            return res;
+        } catch (Exception e) {
+            throw new UserException("获取签到列表失败！");
+        }
+    }
 
     @Override
     public int signListSum(long actId, String code, int sign) {
