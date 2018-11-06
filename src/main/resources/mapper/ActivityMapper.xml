@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.binwang.dao.IActivityDao">
+    <insert id="addAct" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO activity (name,username,face_obj,judge_charge,begin,end,reg_dead_line,loc_about,
+            limit_num,cost,broad_cast_img,mod_time,add_time,reg,reg_item,description) VALUES(#{name},#{username},#{faceObj},#{judgeCharge},
+            #{begin},#{end},#{regDeadLine},#{locAbout},#{limitNum},#{cost},#{broadCastImg},unix_timestamp(), unix_timestamp(),#{reg},#{regItem},#{description})
+    </insert>
+    <insert id="regitemAdd" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO reg_item (title,dtype,ifneed,username,options) VALUES(#{title},#{dtype},#{ifneed},#{username},#{options})
+    </insert>
+
+    <select id="listAct" resultType="com.binwang.bean.activity.ActListModel">
+        SELECT id,name,begin,end FROM activity WHERE username=#{username}
+        <if test='name != ""'>
+            AND name LIKE '%${name}%'
+        </if>
+        <if test='begin != ""'>
+            AND begin &gt;= #{begin}
+        </if>
+        <if test='end != ""'>
+            AND end &lt;= #{end}
+        </if>
+        order by begin desc limit #{start},#{pageSum}
+    </select>
+    <select id="regitemList" resultType="com.binwang.bean.activity.RegItemListModel">
+        SELECT id,title,dtype,ifneed,options FROM reg_item where username=#{username}limit #{start},#{pageSum}
+    </select>
+    <select id="actregitemList" resultType="com.binwang.bean.activity.RegItemListModel">
+        SELECT title FROM reg_item where username=#{username}
+    </select>
+    <select id="signList" resultType="com.binwang.bean.activity.SignListModel">
+        SELECT open_id as openId,credential_code as code,is_sign as sign,status,reg_item as regItem FROM f_user_act WHERE act_id = #{actId}
+        <if test='code != ""'>
+            AND credential_code = #{code}
+        </if>
+        <if test='sign == "-1"'>
+            AND status=0 or status=2
+        </if>
+        <if test='sign=="0" or sign=="1"'>
+            AND is_sign=#{sign}
+        </if>
+        <if test='sign=="2"'>
+            AND status=2
+        </if>
+        <if test='sign=="3"'>
+            AND status=0
+        </if>
+        limit #{start},#{pageSum}
+    </select>
+    <select id="signListAll" resultType="com.binwang.bean.activity.SignListModel">
+        SELECT open_id as openId,credential_code as code,is_sign as sign,status,reg_item as regItem FROM f_user_act WHERE act_id = #{actId}
+        <if test='code != ""'>
+            AND credential_code = #{code}
+        </if>
+        <if test='sign == "-1"'>
+            AND status=0 or status=2
+        </if>
+        <if test='sign=="0" or sign=="1"'>
+            AND is_sign=#{sign}
+        </if>
+        <if test='sign=="2"'>
+            AND status=2
+        </if>
+        <if test='sign=="3"'>
+            AND status=0
+        </if>
+    </select>
+
+
+    <select id="listActSum" resultType="java.lang.Integer">
+        SELECT count(id) FROM activity WHERE username=#{username}
+        <if test='name != ""'>
+            AND name LIKE '%${name}%'
+        </if>
+        <if test='begin != ""'>
+            AND begin &gt;= #{begin}
+        </if>
+        <if test='end != ""'>
+            AND end &lt;= #{end}
+        </if>
+
+    </select>
+    <select id="regitemListSum" resultType="java.lang.Integer">
+        SELECT count(id) FROM reg_item WHERE username=#{username}
+    </select>
+
+    <select id="signListSum" resultType="java.lang.Integer">
+        SELECT count(id) FROM f_user_act WHERE act_id = #{actId}
+        <if test='code != ""'>
+            AND credential_code = #{code}
+        </if>
+        <if test='sign != "-1"'>
+            AND is_sign = #{sign} AND status=0
+        </if>
+        <if test='sign=="-1"'>
+            AND status=0
+        </if>
+
+    </select>
+
+    <delete id="deleteResource">
+        DELETE FROM activity_resources where activity_id = #{id}
+        <if test='type &gt; 0'>
+            AND type = #{type}
+        </if>
+    </delete>
+
+
+</mapper>

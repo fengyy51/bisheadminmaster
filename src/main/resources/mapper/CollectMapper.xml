@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.binwang.dao.ICollectDao">
+
+    <select id="getList" resultType="com.binwang.bean.collect.CListModel">
+        SELECT id,open_id as openId,reg_item as regItem,is_ok as isOk FROM f_user_act WHERE act_id = #{collectId}
+        <if test='type != "-1"'>
+            AND is_ok = #{type}
+        </if>
+        <if test='openId!=""'>
+            AND open_Id=#{openId}
+        </if>
+        order by id limit #{start},#{pageSum}
+    </select>
+
+
+    <select id="listSum" resultType="java.lang.Integer">
+        SELECT count(id) FROM f_user_act WHERE act_id = #{collectId}
+        <if test='type != "-1"'>
+            AND is_ok = #{type}
+        </if>
+        <if test='openId!=""'>
+            AND open_Id=#{openId}
+        </if>
+
+    </select>
+    <insert id="addVoteParam" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO vote_params (username,act_id,act_name,begin,end,pro_num,vote_num,share_num,vote_max_num,vote_decoration,pro_approved)VALUES(#{username},#{actId},#{actName},#{begin},#{end},#{proNum},#{voteNum},#{shareNum},#{voteMaxNum},#{voteDecoration},#{proApproved})
+    </insert>
+    <select id="listVote" resultType="com.binwang.bean.collect.VoteListModel">
+        SELECT id,act_name,begin,end FROM vote_params WHERE username=#{username}
+        <if test='actName != ""'>
+            AND act_name LIKE '%${actName}%'
+        </if>
+        <if test='begin != ""'>
+            AND begin &gt;= #{begin}
+        </if>
+        <if test='end != ""'>
+            AND end &lt;= #{end}
+        </if>
+        order by begin desc limit #{start},#{pageSum}
+    </select>
+    <select id="listVoteSum" resultType="java.lang.Integer">
+        SELECT count(id) FROM vote_params WHERE username=#{username}
+        <if test='actName != ""'>
+            AND act_name LIKE '%${actName}%'
+        </if>
+        <if test='begin != ""'>
+            AND begin &gt;= #{begin}
+        </if>
+        <if test='end != ""'>
+            AND end &lt;= #{end}
+        </if>
+    </select>
+    <select id="voteResult" resultType="com.binwang.bean.collect.VoteResultModel">
+        SELECT id,item_id as itemId,vote_num as votenum FROM f_vote WHERE act_id = #{actId}
+        <if test='itemId != "-1"'>
+            AND item_id = #{itemId}
+        </if>
+        order by vote_num DESC limit #{start},#{pageSum}
+    </select>
+
+
+    <select id="voteResultSum" resultType="java.lang.Integer">
+        SELECT count(id) FROM f_vote WHERE act_id = #{actId}
+        <if test='itemId != "-1"'>
+            AND item_id = #{itemId}
+        </if>
+
+    </select>
+    <select id="getBrushlist" resultType="com.binwang.bean.collect.VoteBrushModel">
+        SELECT a.id,a.ip,from_unixtime(a.addtime) as addtime,a.record,a.user_agent,a.open_id from f_user_vote a left join vote_params b on a.act_id = b.act_id where b.act_name = #{actName}and  a.record like '%,${id},%'
+        <if test='begin != ""'>
+            AND a.addtime &gt;=UNIX_TIMESTAMP(#{begin})
+        </if>
+        <if test='end != ""'>
+            AND a.addtime &lt;=UNIX_TIMESTAMP(#{end})
+        </if>
+        order by a.addtime desc
+    </select>
+    <select id="getBrushlistSum" resultType="java.lang.Integer">
+        SELECT count(a.id) from f_user_vote a left join vote_params b on a.act_id = b.act_id where b.act_name = #{actName} and a.record like '%,${id},%'
+        <if test='begin != ""'>
+        AND a.addtime >=UNIX_TIMESTAMP(#{begin})
+        </if>
+        <if test='end != ""'>
+        AND a.addtime &lt;=UNIX_TIMESTAMP(#{end})
+        </if>
+
+    </select>
+    <select id="getRecordIDS" resultType="java.lang.Integer">
+        SELECT DISTINCT a.id  from f_user_act a  left join vote_params b on a.act_id = b.act_id where b.act_name = #{actName}
+    </select>
+
+</mapper>

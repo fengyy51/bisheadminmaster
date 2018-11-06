@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.binwang.dao.IGalleryDao">
+    <select id="listGallery" resultType="com.binwang.bean.gallery.GalleryListModel">
+        SELECT a.id as id, a.name as name,a.start_time as begin,a.stop_time as end FROM scratch_api_gallery a left JOIN (SELECT DISTINCT  gallery_name,gallery_user FROM gallery_admin ) b on a.name= b.gallery_name where b.gallery_user=#{username}
+        <if test='name != ""'>
+            AND a.name LIKE '%${name}%'
+        </if>
+        <if test='begin != ""'>
+            AND a.start_time &gt;= #{begin}
+        </if>
+        <if test='end != ""'>
+            AND a.stop_time &lt;= #{end}
+        </if>
+        order by a.start_time desc limit #{start},#{pageSum}
+    </select>
+
+    <select id="listGallerySum" resultType="java.lang.Integer">
+        SELECT count(a.id) FROM scratch_api_gallery a left JOIN (SELECT DISTINCT  gallery_name,gallery_user FROM gallery_admin ) b on a.name= b.gallery_name where b.gallery_user=#{username}
+        <if test='name != ""'>
+            AND a.name LIKE '%${name}%'
+        </if>
+        <if test='begin != ""'>
+            AND a.start_time &gt;= #{begin}
+        </if>
+        <if test='end != ""'>
+            AND a.stop_time &lt;= #{end}
+        </if>
+
+    </select>
+    <select id="getProList" resultType="com.binwang.bean.gallery.GalleryProModel">
+        SELECT a.id as id ,a.admin_checked as adminChecked,a.gallery_id as galleryId,a.production_id as productionId,b.name as name,b.image as image,b.author_id as authorId FROM scratch_api_galleryproduction a left join scratch_api_production b on a.production_id=b.id WHERE a.gallery_id = #{galleryId}
+        <if test='type != "-1"'>
+            AND a.admin_checked = #{type}
+        </if>
+        <if test='name!=""'>
+            AND b.name LIKE '%${name}%'
+        </if>
+        order by a.id limit #{start},#{pageSum}
+    </select>
+
+    <select id="listProSum" resultType="java.lang.Integer">
+        SELECT count(a.id) FROM scratch_api_galleryproduction a left join scratch_api_production b on a.production_id=b.id WHERE a.gallery_id = #{galleryId}
+        <if test='type != "-1"'>
+            AND a.admin_checked = #{type}
+        </if>
+        <if test='name!=""'>
+            AND b.name LIKE '%${name}%'
+        </if>
+
+    </select>
+
+
+</mapper>

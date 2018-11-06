@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.binwang.dao.IShopDao">
+    <insert id="addShop" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO shop (name,area,floor,keeper_name,shop_about,loc_about,
+        loc_about_relation,phone,qr_code_url,mod_time,add_time) VALUES(#{name},#{area},#{floor},
+        #{keeperName},#{shopAbout},#{locAbout},#{locAboutRelation},#{phone},#{qrCodeUrl},unix_timestamp(), unix_timestamp())
+    </insert>
+
+    <select id="listShop" resultType="com.binwang.bean.shop.ShopListModel">
+        SELECT id,name,area,floor FROM shop WHERE 1 = 1
+        <if test='name != ""'>
+            AND name LIKE '%${name}%'
+        </if>
+        <if test='area != "-1"'>
+            AND area = #{area}
+        </if>
+        <if test='floor != "-1"'>
+            AND floor = #{floor}
+        </if>
+        order by id desc limit #{start},#{pageSum}
+    </select>
+
+
+    <select id="listShopSum" resultType="java.lang.Integer">
+        SELECT count(id) FROM shop WHERE 1 = 1
+        <if test='name != ""'>
+            AND name LIKE '%${name}%'
+        </if>
+        <if test='area != "-1"'>
+            AND area = #{area}
+        </if>
+        <if test='floor != "-1"'>
+            AND floor = #{floor}
+        </if>
+    </select>
+
+</mapper>

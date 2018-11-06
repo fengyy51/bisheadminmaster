@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.binwang.dao.IVoteDataDao">
+
+
+    <select id="listVoteData" resultType="com.binwang.bean.votedata.VoteListModel">
+        SELECT id,act_id as actId,content,img_url as imgUrls FROM vote_data_yiwu WHERE username=#{username}
+        <if test='content != ""'>
+            AND content LIKE '%${content}%'
+        </if>
+        <if test='act_id != "-1"'>
+            AND act_id =#{act_id}
+        </if>
+        order by id desc limit #{start},#{pageSum}
+    </select>
+
+    <select id="listVoteDataSum" resultType="java.lang.Integer">
+        SELECT count(id) FROM vote_data_yiwu WHERE username=#{username}
+        <if test='content != ""'>
+            AND content LIKE '%${content}%'
+        </if>
+        <if test='act_id != "-1"'>
+            AND act_id =#{act_id}
+        </if>
+    </select>
+
+</mapper>

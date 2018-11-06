@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.binwang.dao.IPrizeDao">
+
+
+    <select id="getNoLimitPrize" resultType="com.binwang.bean.prize.PrizeModel">
+        select id,name,num,type from prize
+        where relation_id = #{relationId} and id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+          #{item}
+       </foreach>
+    </select>
+    <select id="getList" resultType="com.binwang.bean.prize.PrizeModel">
+        select id,act_name,type,name,num,ratio,info,duijiang_time,duijiang_loc from prize where act_name=#{actName}
+        <if test='name != ""'>
+            AND name like '%${name}%'
+        </if>
+        <if test='type != ""'>
+            AND type=#{type}
+        </if>
+        order by id limit #{start},#{pageSum}
+    </select>
+    <select id="getListSum" resultType="Integer">
+        select count(id)from prize where act_name=#{actName}
+        <if test='name != ""'>
+            AND name like '%${name}%'
+        </if>
+        <if test='type != ""'>
+            AND type=#{type}
+        </if>
+    </select>
+    <select id="listPrize" resultType="com.binwang.bean.prize.PrizeListModel">
+        SELECT id,name,begin,end FROM prize_params WHERE user_name=#{username}
+        <if test='name != ""'>
+            AND name LIKE '%${name}%'
+        </if>
+        <if test='begin != ""'>
+            AND begin &gt;= #{begin}
+        </if>
+        <if test='end != ""'>
+            AND end &lt;= #{end}
+        </if>
+        order by begin desc limit #{start},#{pageSum}
+    </select>
+    <select id="listPrizeSum" resultType="java.lang.Integer">
+        SELECT count(id) FROM prize_params WHERE user_name=#{username}
+        <if test='name != ""'>
+            AND name LIKE '%${name}%'
+        </if>
+        <if test='begin != ""'>
+            AND begin &gt;= #{begin}
+        </if>
+        <if test='end != ""'>
+            AND end &lt;= #{end}
+        </if>
+    </select>
+    <insert id="addPrizeParam" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO prize_params (user_name,name,begin,end,code,prize_num,share_num,prize_max_num,prize_decoration,top_img,prizelist_img,color)VALUES(#{username},#{name},#{begin},#{end},#{code},#{prizeNum},#{shareNum},#{prizeMaxNum},#{prizeDecoration},#{topImg},#{prizelistImg},#{color})
+    </insert>
+    <select id="userList" resultType="com.binwang.bean.prize.PrizeUserModel">
+        SELECT id ,open_id as openId,code,is_use as isUse,prize_id as prizeId,from_unixtime(mod_time) as modtime,from_unixtime(add_time) as addtime FROM f_user_prize WHERE relation_id = #{actId}
+        <if test='code != ""'>
+            AND code = #{code}
+        </if>
+        <if test='isUse != "-1"'>
+            AND is_use = #{isUse}
+        </if>
+        limit #{start},#{pageSum}
+    </select>
+    <select id="userListAll" resultType="com.binwang.bean.prize.PrizeUserModel">
+        SELECT id ,open_id as openId,code,is_use as isUse,prize_id as prizeId,from_unixtime(mod_time) as modtime,from_unixtime(add_time) as addtime FROM f_user_prize WHERE relation_id = #{actId}
+        <if test='code != ""'>
+            AND code = #{code}
+        </if>
+        <if test='isUse != "-1"'>
+            AND is_use = #{isUse}
+        </if>
+    </select>
+    <select id="userListSum" resultType="java.lang.Integer">
+        SELECT count(id) FROM f_user_prize WHERE relation_id = #{actId}
+        <if test='code != ""'>
+            AND code = #{code}
+        </if>
+        <if test='isUse != "-1"'>
+            AND is_use = #{isUse}
+        </if>
+    </select>
+
+</mapper>
