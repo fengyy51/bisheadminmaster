@@ -22,7 +22,7 @@ public class AnalysisController {
     @Resource
     private AnalysisService analysisService;
 
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:8088")
     @RequestMapping(value = "/user-prize", method = RequestMethod.GET)
     @ResponseBody
     public Object UserPrize(){
@@ -34,7 +34,7 @@ public class AnalysisController {
             return ResponseUtil.errorJSON(e.getMessage());
         }
     }
-    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "http://localhost:8088")
     @RequestMapping(value = "/user-collect", method = RequestMethod.GET)
     @ResponseBody
     public Object UserCollect(){

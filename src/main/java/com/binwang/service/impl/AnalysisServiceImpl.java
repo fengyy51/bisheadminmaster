@@ -27,6 +27,7 @@ public class AnalysisServiceImpl implements AnalysisService {
             List<Userprize> res = analysisDao.listUserPrize();
             return res;
         } catch (Exception e) {
+            LOGGER.error(e.getMessage());
             throw new UserException("获取用户抽奖记录失败！");
         }
     }
@@ -37,6 +38,7 @@ public class AnalysisServiceImpl implements AnalysisService {
             List<UserCollect> res = analysisDao.listUserCollect();
             return res;
         } catch (Exception e) {
+            LOGGER.error(e.getMessage());
             throw new UserException("获取用户抽奖记录失败！");
         }
     }
