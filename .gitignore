@@ -4,7 +4,7 @@ log.path_IS_UNDEFINED
 .DS_Store
 
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
